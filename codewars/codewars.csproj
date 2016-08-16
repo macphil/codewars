@@ -56,6 +56,8 @@
     <Compile Include="Descending Order\DescendingOrderKata.cs" />
     <Compile Include="Mumbling\MumblingKata.cs" />
     <Compile Include="Mumbling\MumblingTests.cs" />
+    <Compile Include="SmallestIntegerFinder\SmallestIntegerFinderKata.cs" />
+    <Compile Include="SmallestIntegerFinder\SmallestIntegerFinderTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

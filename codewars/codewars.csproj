@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Counting Duplicates\Kata.cs" />
+    <Compile Include="Counting Duplicates\KataTest.cs" />
     <Compile Include="Descending Order\Tests.cs" />
     <Compile Include="Descending Order\Kata.cs" />
     <Compile Include="Program.cs" />

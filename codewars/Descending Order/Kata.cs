@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Runtime.Remoting.Channels;
 
 namespace codewars.Descending_Order
 {
@@ -20,7 +18,6 @@ namespace codewars.Descending_Order
             var sortedString = new string(numAsCharArray.OrderByDescending(s => s).ToArray());
 
             return Int32.Parse(sortedString);
-
         }
     }
 }

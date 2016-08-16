@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace codewars.Mumbling
 {
@@ -10,7 +7,15 @@ namespace codewars.Mumbling
     {
         public static String Accum(string s)
         {
-            return s;
+            var returnStringList = new List<string>();
+
+            var i = 0;
+            foreach (char c in s.ToCharArray())
+            {
+                returnStringList.Add(c.ToString().ToUpperInvariant() + new String(c, i++).ToLowerInvariant());
+            }
+
+            return String.Join("-", returnStringList);
         }
     }
 }

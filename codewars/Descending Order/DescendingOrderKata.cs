@@ -2,7 +2,7 @@
 
 namespace codewars.Descending_Order
 {
-    public class Kata
+    public class DescendingOrderKata
     {
         public static int DescendingOrder(int num)
         {

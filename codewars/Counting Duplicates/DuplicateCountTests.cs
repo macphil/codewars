@@ -3,7 +3,7 @@
     using NUnit.Framework;
 
     [TestFixture]
-    public class KataTest
+    public class DuplicateCountTests
     {
         [Test]
         [TestCase(0, "")]
@@ -12,9 +12,9 @@
         [TestCase(2, "aabBcde")]
         [TestCase(1, "Indivisibility")]
         [TestCase(2, "Indivisibilities")]
-        public void DuplicateCountTests(int expected, string given)
+        public void DuplicateCountTest(int expected, string given)
         {
-            Assert.AreEqual(expected, Kata.DuplicateCount(given));
+            Assert.AreEqual(expected, DuplicateCountKata.DuplicateCount(given));
         }
     }
 }

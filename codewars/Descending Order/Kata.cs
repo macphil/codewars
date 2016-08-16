@@ -19,7 +19,7 @@ namespace codewars.Descending_Order
 
             var sortedString = new string(numAsCharArray.OrderByDescending(s => s).ToArray());
 
-            return Int32.Parse(sortedString.ToString());
+            return Int32.Parse(sortedString);
 
         }
     }

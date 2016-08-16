@@ -14,7 +14,7 @@ namespace codewars.Descending_Order
         [TestCase(12, 21)]
         [TestCase(42, 42)]
         [TestCase(123045, 543210)]
-        public void Test(int i, int expected)
+        public void DescendingOrderTest(int i, int expected)
         {
             Assert.AreEqual(expected, Kata.DescendingOrder(i));
         }

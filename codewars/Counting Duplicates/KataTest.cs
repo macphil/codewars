@@ -12,7 +12,7 @@
         [TestCase(2, "aabBcde")]
         [TestCase(1, "Indivisibility")]
         [TestCase(2, "Indivisibilities")]
-        public void KataTests(int expected, string given)
+        public void DuplicateCountTests(int expected, string given)
         {
             Assert.AreEqual(expected, Kata.DuplicateCount(given));
         }

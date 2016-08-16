@@ -54,9 +54,12 @@
     <Compile Include="Counting Duplicates\DuplicateCountTests.cs" />
     <Compile Include="Descending Order\DescendingOrderTests.cs" />
     <Compile Include="Descending Order\DescendingOrderKata.cs" />
+    <Compile Include="Mumbling\MumblingKata.cs" />
+    <Compile Include="Mumbling\MumblingTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="readme.md" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />

@@ -1,4 +1,9 @@
-﻿namespace codewars.Descending_Order
+﻿using System;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Runtime.Remoting.Channels;
+
+namespace codewars.Descending_Order
 {
     public class Kata
     {
@@ -10,7 +15,12 @@
                 return num;
             }
 
-            return num;
+            var numAsCharArray = num.ToString().ToCharArray();
+
+            var sortedString = new string(numAsCharArray.OrderByDescending(s => s).ToArray());
+
+            return Int32.Parse(sortedString.ToString());
+
         }
     }
 }

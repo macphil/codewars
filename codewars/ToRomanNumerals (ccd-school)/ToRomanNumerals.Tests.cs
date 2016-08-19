@@ -32,6 +32,7 @@ namespace codewars.ToRomanNumerals
         [TestCase(42, ExpectedResult = "XLII")]
         [TestCase(99, ExpectedResult = "XCIX")]
         [TestCase(2013, ExpectedResult = "MMXIII")]
+        [TestCase(1000, ExpectedResult = "M")]
         public string ToRomanNumerals_Test(int value) => ToRomanNumeralsKata.ParseInt(value);
     }
 }

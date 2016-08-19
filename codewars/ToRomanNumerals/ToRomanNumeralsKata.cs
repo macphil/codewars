@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Linq;
+using System.Text;
 
 namespace codewars.ToRomanNumerals
 {
@@ -14,24 +15,24 @@ namespace codewars.ToRomanNumerals
                 return string.Empty;
             }
 
-            var romanNumber = string.Empty;
+            var builder = new System.Text.StringBuilder();
 
-            foreach (KeyValuePair<int, string> romanSign in RomanSigns.Reverse())
+            foreach (KeyValuePair<int, string> romanSign in RomanSigns.Reverse().Where(romanSign => Convert.ToInt32(value / romanSign.Key) > 0))
             {
                 var anz = Convert.ToInt32(value / romanSign.Key);
-                if (anz == 0)
-                {
-                    continue;
-                }
 
-                romanNumber += (romanSign.Value.Length == 1) ?
-                    new string(romanSign.Value.ToCharArray()[0], anz)
-                    : romanSign.Value;
+                builder.Append(RomanRepresentation(romanSign, anz));
 
                 value = value % romanSign.Key;
             }
+            return builder.ToString();
+        }
 
-            return romanNumber;
+        private static string RomanRepresentation(KeyValuePair<int, string> romanSign, int anz)
+        {
+            return (romanSign.Value.Length == 1) ?
+                new string(romanSign.Value.ToCharArray()[0], anz)
+                : romanSign.Value;
         }
 
         private static Dictionary<int, string> RomanSigns
@@ -55,16 +56,6 @@ namespace codewars.ToRomanNumerals
                     {1000, "M"}
                 };
             }
-        }
-
-        private static string HandleFour(string romanNumber)
-        {
-            return romanNumber.Replace("IIII", "IV").Replace("XXXX", "XL");
-        }
-
-        private static string HandleNine(string romanNumber)
-        {
-            return romanNumber.Replace("VIIII", "IX").Replace("LXXXX", "XC");
         }
     }
 }

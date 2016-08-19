@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 
@@ -15,9 +14,10 @@ namespace codewars.ToRomanNumerals
                 return string.Empty;
             }
 
-            var builder = new System.Text.StringBuilder();
+            var builder = new StringBuilder();
 
-            foreach (KeyValuePair<int, string> romanSign in RomanSigns.Reverse().Where(romanSign => Convert.ToInt32(value / romanSign.Key) > 0))
+            foreach (KeyValuePair<int, string> romanSign in RomanSigns.Reverse()
+                .Where(romanSign => Convert.ToInt32(value / romanSign.Key) > 0))
             {
                 var anz = Convert.ToInt32(value / romanSign.Key);
 

@@ -56,6 +56,7 @@
     <Compile Include="Descending Order\DescendingOrderKata.cs" />
     <Compile Include="Mumbling\MumblingKata.cs" />
     <Compile Include="Mumbling\MumblingTests.cs" />
+    <Compile Include="playing-with-digits\playing-with-digits.tests.cs" />
     <Compile Include="SmallestIntegerFinder\SmallestIntegerFinderKata.cs" />
     <Compile Include="SmallestIntegerFinder\SmallestIntegerFinderTests.cs" />
     <Compile Include="SumOfNumbers\SumOfNumbersKata.cs" />

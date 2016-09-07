@@ -22,8 +22,6 @@ namespace codewars.playing_with_digits
         [TestCase(261, 3, ExpectedResult = 5)]
         [TestCase(2646798, 1, ExpectedResult = 1)]
         [TestCase(2697, 3, ExpectedResult = 66)]
-        [TestCase(3456789, 1, ExpectedResult = -1)]
-        [TestCase(3456789, 5, ExpectedResult = -1)]
         [TestCase(46288, 3, ExpectedResult = 51)]
         [TestCase(46288, 5, ExpectedResult = -1)]
         [TestCase(47016, 2, ExpectedResult = 1)]
@@ -38,6 +36,8 @@ namespace codewars.playing_with_digits
         [TestCase(7388, 2, ExpectedResult = 5)]
         [TestCase(89, 1, ExpectedResult = 1)]
         [TestCase(92, 1, ExpectedResult = -1)]
+        [TestCase(3456789, 1, ExpectedResult = -1)]
+        [TestCase(3456789, 5, ExpectedResult = -1)]
         public int DigPow_Test(int n, int k)
         {
             return DigPow(n, k);
@@ -62,6 +62,12 @@ namespace codewars.playing_with_digits
             {
                 sum += Math.Pow(Char.GetNumericValue(c), p++);
             }
+
+            if (sum > Int32.MaxValue)
+            {
+                return -1;
+            }
+
             if (a == sum)
             {
                 return 1;
@@ -70,12 +76,21 @@ namespace codewars.playing_with_digits
             {
                 return 2;
             }
-
-            for (int i = 3; i < sum / 2; i = i + 2)
+            if (a * 3 == sum)
             {
-                if (a * i == sum)
+                return 3;
+            }
+
+            for (int k = 1; k < (sum / 3); k++)
+            {
+                var ak = a * k;
+                if (ak > (sum))
                 {
-                    return i;
+                    return -1;
+                }
+                if (ak == sum)
+                {
+                    return k;
                 }
             }
 

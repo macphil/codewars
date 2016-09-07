@@ -60,41 +60,10 @@ namespace codewars.playing_with_digits
             double sum = 0;
             foreach (char c in a.ToString())
             {
-                sum += Math.Pow(Char.GetNumericValue(c), p++);
+                sum += Math.Pow(char.GetNumericValue(c), p++);
             }
 
-            if (sum > Int32.MaxValue)
-            {
-                return -1;
-            }
-
-            if (a == sum)
-            {
-                return 1;
-            }
-            if (a * 2 == sum)
-            {
-                return 2;
-            }
-            if (a * 3 == sum)
-            {
-                return 3;
-            }
-
-            for (int k = 1; k < (sum / 3); k++)
-            {
-                var ak = a * k;
-                if (ak > (sum))
-                {
-                    return -1;
-                }
-                if (ak == sum)
-                {
-                    return k;
-                }
-            }
-
-            return -1;
+            return sum % a == 0 ? Convert.ToInt32(sum) / a : -1;
         }
     }
 }

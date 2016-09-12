@@ -65,6 +65,7 @@
     <Compile Include="SumOfNumbers\SumOfNumbersTests.cs" />
     <Compile Include="ToRomanNumerals %28ccd-school%29\ToRomanNumerals.Tests.cs" />
     <Compile Include="ToRomanNumerals\ToRomanNumeralsKata.cs" />
+    <Compile Include="zebulans-nightmare.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

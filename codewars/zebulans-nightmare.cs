@@ -28,20 +28,12 @@ namespace codewars
 
         public string ZebulansNightmare(string functionName)
         {
-            var cfn = string.Empty;
             var builder = new System.Text.StringBuilder();
-            builder.Append(cfn);
-            foreach (string s in functionName.Split('_'))
-            {
-                if (builder.Length == 0)
-                {
-                    builder.Append(s.ToLowerInvariant());
-                }
-                else
-                {
-                    builder.Append(System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(s));
-                }
-            }
+
+            functionName.Split('_').ToList()
+                .ForEach(x => builder.Append(builder.Length == 0 ?
+                                        x.ToLowerInvariant() :
+                                        System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(x)));
 
             return builder.ToString();
         }

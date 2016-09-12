@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using NUnit.Framework;
 
 namespace codewars
@@ -12,21 +13,35 @@ namespace codewars
     public class zebulans_nightmare
     {
         [Test]
-        public void zebulans_nightmare_test()
+        [TestCase("camel_case", ExpectedResult = "camelCase")]
+        [TestCase("mark_as_issue", ExpectedResult = "markAsIssue")]
+        [TestCase("copy_paste_pep8", ExpectedResult = "copyPastePep8")]
+        [TestCase("goto_next_kata", ExpectedResult = "gotoNextKata")]
+        [TestCase("repeat", ExpectedResult = "repeat")]
+        [TestCase("trolling_is_fun", ExpectedResult = "trollingIsFun")]
+        [TestCase("why", ExpectedResult = "why")]
+        [TestCase("123_abc_def", ExpectedResult = "123AbcDef")]
+        public string zebulans_nightmare_test(string functionName)
         {
-            Assert.AreEqual("camelCase", ZebulansNightmare("camel_case"));
-            Assert.AreEqual("markAsIssue", ZebulansNightmare("mark_as_issue"));
-            Assert.AreEqual("copyPastePep8", ZebulansNightmare("copy_paste_pep8"));
-            Assert.AreEqual("gotoNextKata", ZebulansNightmare("goto_next_kata"));
-            Assert.AreEqual("repeat", ZebulansNightmare("repeat"));
-            Assert.AreEqual("trollingIsFun", ZebulansNightmare("trolling_is_fun"));
-            Assert.AreEqual("why", ZebulansNightmare("why"));
-            Assert.AreEqual("123AbcDef", ZebulansNightmare("123_abc_def"));
+            return ZebulansNightmare(functionName);
         }
 
         public string ZebulansNightmare(string functionName)
         {
-            return functionName;
+            var cfn = string.Empty;
+            foreach (string s in functionName.Split('_'))
+            {
+                if (string.IsNullOrWhiteSpace(cfn))
+                {
+                    cfn = s;
+                }
+                else
+                {
+                    cfn += System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(s);
+                }
+            }
+
+            return cfn;
         }
     }
 }

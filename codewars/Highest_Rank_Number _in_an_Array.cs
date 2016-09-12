@@ -1,5 +1,4 @@
-﻿using System.IO;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 /// <summary>
 /// https://www.codewars.com/kata/highest-rank-number-in-an-array/train/csharp
@@ -17,7 +16,14 @@ namespace codewars
         [TestCase(new int[] { 12, 10, 8, 12, 7, 6, 4, 10, 12 }, ExpectedResult = 12, TestName = "fuenf")]
         public int Highest_Rank_Number__in_an_Array_AreEqual(int[] arr)
         {
-            return arr.Length;
+            int res = -1;
+            int maxCount = 0;
+            //foreach (int i in arr.Length)
+            //{
+            //    if (arr.arr.GetValue(i))
+            //}
+
+            return res;
         }
     }
 }

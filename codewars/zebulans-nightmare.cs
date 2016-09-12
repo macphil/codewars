@@ -29,19 +29,21 @@ namespace codewars
         public string ZebulansNightmare(string functionName)
         {
             var cfn = string.Empty;
+            var builder = new System.Text.StringBuilder();
+            builder.Append(cfn);
             foreach (string s in functionName.Split('_'))
             {
-                if (string.IsNullOrWhiteSpace(cfn))
+                if (builder.Length == 0)
                 {
-                    cfn = s;
+                    builder.Append(s.ToLowerInvariant());
                 }
                 else
                 {
-                    cfn += System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(s);
+                    builder.Append(System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(s));
                 }
             }
 
-            return cfn;
+            return builder.ToString();
         }
     }
 }

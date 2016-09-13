@@ -14,7 +14,19 @@ namespace codewars
 
         public static string[] Solution(string str)
         {
-            return null;
+            var splittedString = new System.Collections.Generic.List<string>();
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (i + 1 < str.Length)
+                {
+                    splittedString.Add(str.Substring(i++, 2));
+                }
+                else
+                {
+                    splittedString.Add(str.Substring(i, 1) + '_');
+                }
+            }
+            return splittedString.ToArray();
         }
     }
 }

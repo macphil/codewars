@@ -28,15 +28,9 @@ namespace codewars
 
         public static int Test(string numbers)
         {
-            if (string.IsNullOrWhiteSpace(numbers))
-            {
-                return -1;
-            }
-            var numberArray = numbers.Split(' ');
             var pos = 1;
-
             var numberDict = new Dictionary<int, int>();
-            foreach (string s in numberArray)
+            foreach (string s in numbers.Split(' '))
             {
                 numberDict.Add(pos++, Int32.Parse(s));
             }

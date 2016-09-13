@@ -59,6 +59,7 @@
     <Compile Include="IQ Test.cs" />
     <Compile Include="Mumbling\MumblingKata.cs" />
     <Compile Include="Mumbling\MumblingTests.cs" />
+    <Compile Include="Simple_Pig_Latin.cs" />
     <Compile Include="playing-with-digits\playing-with-digits.tests.cs" />
     <Compile Include="SmallestIntegerFinder\SmallestIntegerFinderKata.cs" />
     <Compile Include="SmallestIntegerFinder\SmallestIntegerFinderTests.cs" />

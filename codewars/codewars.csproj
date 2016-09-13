@@ -63,6 +63,7 @@
     <Compile Include="SmallestIntegerFinder\SmallestIntegerFinderKata.cs" />
     <Compile Include="SmallestIntegerFinder\SmallestIntegerFinderTests.cs" />
     <Compile Include="sort-arrays-1.cs" />
+    <Compile Include="SplitString.cs" />
     <Compile Include="SumOfNumbers\SumOfNumbersKata.cs" />
     <Compile Include="SumOfNumbers\SumOfNumbersTests.cs" />
     <Compile Include="ToRomanNumerals %28ccd-school%29\ToRomanNumerals.Tests.cs" />

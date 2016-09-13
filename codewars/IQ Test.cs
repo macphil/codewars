@@ -1,4 +1,7 @@
-﻿using NUnit.Framework;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using NUnit.Framework;
 
 namespace codewars
 {
@@ -25,8 +28,27 @@ namespace codewars
 
         public static int Test(string numbers)
         {
-            //Your code is here...
-            return -1;
+            if (string.IsNullOrWhiteSpace(numbers))
+            {
+                return -1;
+            }
+            var numberArray = numbers.Split(' ');
+            var pos = 1;
+
+            var numberDict = new Dictionary<int, int>();
+            foreach (string s in numberArray)
+            {
+                numberDict.Add(pos++, Int32.Parse(s));
+            }
+
+            if (numberDict.Count(x => x.Value % 2 == 0) == 1)
+            {
+                return numberDict.First(x => x.Value % 2 == 0).Key;
+            }
+            else
+            {
+                return numberDict.First(x => x.Value % 2 == 1).Key;
+            }
         }
     }
 }

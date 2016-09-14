@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="bit-calculator.cs" />
     <Compile Include="Counting Duplicates\DuplicateCountKata.cs" />
     <Compile Include="Counting Duplicates\DuplicateCountTests.cs" />
     <Compile Include="Descending Order\DescendingOrderTests.cs" />

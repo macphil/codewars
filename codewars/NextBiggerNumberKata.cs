@@ -70,6 +70,7 @@ namespace codewars
         [TestCase("123", "7", ExpectedResult = "130")]
         [TestCase("1", "2015", ExpectedResult = "2016")]
         [TestCase("788", "22", ExpectedResult = "810")]
+        [TestCase("007", "000999", ExpectedResult = "1006")]
         [TestCase("", "5", ExpectedResult = "5")]
         [TestCase("712569312664357328695151392", "8100824045303269669937", ExpectedResult = "712577413488402631964821329")]
         [TestCase("50095301248058391139327916261", "81055900096023504197206408605", ExpectedResult = "131151201344081895336534324866")]
@@ -84,32 +85,24 @@ namespace codewars
             a = a.PadLeft(maxDigits, '0');
             b = b.PadLeft(maxDigits, '0');
 
-            var res = string.Empty;
+            var sumString = string.Empty;
 
             var uebertrag = 0;
             for (int i = maxDigits - 1; i >= 0; i--)
             {
                 var ai = char.GetNumericValue(a[i]);
                 var bi = char.GetNumericValue(b[i]);
-                var ci = ai + bi + uebertrag;
-
-                if (ci >= 10)
+                var charSum = ai + bi + uebertrag;
+                uebertrag = 0;
+                if (charSum >= 10)
                 {
                     uebertrag = 1;
-                    ci -= 10;
+                    charSum -= 10;
                 }
-                else
-                {
-                    uebertrag = 0;
-                }
-
-                res = $"{ci}{res}";
+                sumString = $"{charSum}{sumString}";
             }
-            if (uebertrag == 1)
-            {
-                res = $"1{res}";
-            }
-            return res.TrimStart('0');
+            sumString = $"{uebertrag}{sumString}";
+            return sumString.TrimStart('0');
         }
     }
 }

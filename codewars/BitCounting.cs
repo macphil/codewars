@@ -11,6 +11,11 @@ namespace codewars
         [TestCase(7, ExpectedResult = 3)]
         [TestCase(9, ExpectedResult = 2)]
         [TestCase(10, ExpectedResult = 2)]
+        [TestCase(254, ExpectedResult = 7)]
+        [TestCase(255, ExpectedResult = 8)]
+        [TestCase(256, ExpectedResult = 1)]
+        [TestCase(257, ExpectedResult = 2)]
+        [TestCase(77231418, ExpectedResult = 14)]
         public int CountBits_Tests(int actual)
         {
             return CountBits(actual);
@@ -18,11 +23,14 @@ namespace codewars
 
         private static int CountBits(int n)
         {
-            if (n > byte.MaxValue || n < byte.MinValue)
+            var count = 0;
+            double val = n;
+            while (val > 0)
             {
-                return -1;
+                val -= Math.Pow(2, Convert.ToInt32(Math.Floor(Math.Log(val, 2))));
+                count++;
             }
-            return Convert.ToString(Convert.ToByte(n), 2).Replace("0", string.Empty).Length;
+            return count;
         }
 
         [TestCase(0, ExpectedResult = "0")]
@@ -37,6 +45,15 @@ namespace codewars
                 return Convert.ToString(result, 2);
             }
             return "";
+        }
+
+        [TestCase(2, ExpectedResult = 1)]
+        [TestCase(4, ExpectedResult = 2)]
+        [TestCase(8, ExpectedResult = 3)]
+        [TestCase(256, ExpectedResult = 8)]
+        public int blubb(int x)
+        {
+            return Convert.ToInt32(Math.Floor(Math.Log(x, 2)));
         }
     }
 }

@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AreaCalculationTests.cs" />
     <Compile Include="BinaryNumbers_Tests.cs" />
     <Compile Include="bit-calculator.cs" />
     <Compile Include="Counting Duplicates\DuplicateCountKata.cs" />

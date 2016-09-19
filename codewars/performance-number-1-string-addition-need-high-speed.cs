@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using NUnit.Framework;
 
 namespace codewars
@@ -31,7 +32,7 @@ namespace codewars
 
         public static string Performance(Func<int> getRandomValue)
         {
-            throw new NotImplementedException();
+            return new string(Convert.ToChar($"{getRandomValue.Invoke()}"), 150000);
         }
     }
 }

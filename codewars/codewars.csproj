@@ -53,6 +53,7 @@
     <Compile Include="AreaCalculationTests.cs" />
     <Compile Include="BinaryNumbers_Tests.cs" />
     <Compile Include="bit-calculator.cs" />
+    <Compile Include="BitCounting.cs" />
     <Compile Include="Counting Duplicates\DuplicateCountKata.cs" />
     <Compile Include="Counting Duplicates\DuplicateCountTests.cs" />
     <Compile Include="Descending Order\DescendingOrderTests.cs" />

@@ -23,14 +23,7 @@ namespace codewars
 
         private static int CountBits(int n)
         {
-            var count = 0;
-            double val = n;
-            while (val > 0)
-            {
-                val -= Math.Pow(2, Convert.ToInt32(Math.Floor(Math.Log(val, 2))));
-                count++;
-            }
-            return count;
+            return Convert.ToString(n, 2).Replace("0", string.Empty).Length;
         }
 
         [TestCase(0, ExpectedResult = "0")]

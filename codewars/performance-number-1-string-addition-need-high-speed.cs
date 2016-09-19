@@ -37,7 +37,7 @@ namespace codewars
             builder.Append(str);
             for (int i = 0; i < 150000; i++)
             {
-                builder.Append($"{method.Invoke()}");
+                builder.Append(method.Invoke());
             }
 
             return builder.ToString();

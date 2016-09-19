@@ -30,9 +30,17 @@ namespace codewars
             Assert.AreEqual((char)(lastValue + 48), actual.Last());
         }
 
-        public static string Performance(Func<int> getRandomValue)
+        public static string Performance(Func<int> method)
         {
-            return new string(Convert.ToChar($"{getRandomValue.Invoke()}"), 150000);
+            var str = string.Empty;
+            var builder = new System.Text.StringBuilder();
+            builder.Append(str);
+            for (int i = 0; i < 150000; i++)
+            {
+                builder.Append($"{method.Invoke()}");
+            }
+
+            return builder.ToString();
         }
     }
 }

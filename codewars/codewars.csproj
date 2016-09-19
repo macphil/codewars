@@ -63,6 +63,7 @@
     <Compile Include="Mumbling\MumblingKata.cs" />
     <Compile Include="Mumbling\MumblingTests.cs" />
     <Compile Include="NextBiggerNumberKata.cs" />
+    <Compile Include="PowerSumDig.cs" />
     <Compile Include="Simple_Pig_Latin.cs" />
     <Compile Include="playing-with-digits\playing-with-digits.tests.cs" />
     <Compile Include="SmallestIntegerFinder\SmallestIntegerFinderKata.cs" />

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 [TestFixture]
 public class AreaCalculationTests
@@ -65,65 +63,5 @@ public class AreaCalculationTests
     public void TotalAreaIs0WhenThereAreNoShapes()
     {
         Assert.AreEqual(0, sut.GetTotalArea());
-    }
-}
-
-internal class Square : Rectangle
-{
-    public Square(double side) : base(side, side)
-    {
-    }
-}
-
-internal class Circle : IShape
-{
-    private double radius;
-
-    public Circle(double radius)
-    {
-        this.radius = radius;
-    }
-
-    public double Area => Math.Pow(radius, 2) * Math.PI;
-}
-
-internal class Rectangle : IShape
-{
-    private readonly double width;
-    private readonly double height;
-
-    public Rectangle(double height, double width)
-    {
-        this.height = height;
-        this.width = width;
-    }
-
-    public double Area => height * width;
-}
-
-internal class Triangle : IShape
-{
-    private double triangleBase;
-    private double triangleHeight;
-
-    public Triangle(double triangleBase, double triangleHeight)
-    {
-        this.triangleBase = triangleBase;
-        this.triangleHeight = triangleHeight;
-    }
-
-    public double Area => (triangleBase * triangleHeight) / 2;
-}
-
-public interface IShape
-{
-    double Area { get; }
-}
-
-public class Calculator
-{
-    public double GetTotalArea(params IShape[] shapes)
-    {
-        return Math.Round(shapes.Sum(s => s.Area), 2);
     }
 }

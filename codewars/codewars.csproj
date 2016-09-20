@@ -50,7 +50,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AreaCalculationTests.cs" />
+    <Compile Include="AreaCalculation\AreaCalculationTests.cs" />
+    <Compile Include="AreaCalculation\Calculator.cs" />
+    <Compile Include="AreaCalculation\Circle.cs" />
+    <Compile Include="AreaCalculation\IShape.cs" />
+    <Compile Include="AreaCalculation\Rectangle.cs" />
+    <Compile Include="AreaCalculation\Square.cs" />
+    <Compile Include="AreaCalculation\Triangle.cs" />
     <Compile Include="BinaryNumbers_Tests.cs" />
     <Compile Include="bit-calculator.cs" />
     <Compile Include="BitCounting.cs" />

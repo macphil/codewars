@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 [TestFixture]
 public class AreaCalculationTests
@@ -65,74 +63,5 @@ public class AreaCalculationTests
     public void TotalAreaIs0WhenThereAreNoShapes()
     {
         Assert.AreEqual(0, sut.GetTotalArea());
-    }
-}
-
-internal class Square : Rectangle
-{
-    public Square(double side) : base(side, side)
-    {
-    }
-}
-
-internal class Circle : Shape
-{
-    private double radius;
-
-    public Circle(double radius)
-    {
-        this.radius = radius;
-    }
-
-    public override double GetTotalArea()
-    {
-        return Math.Pow(radius, 2) * Math.PI;
-    }
-}
-
-internal class Rectangle : Shape
-{
-    private readonly double width;
-    private readonly double height;
-
-    public Rectangle(double height, double width)
-    {
-        this.height = height;
-        this.width = width;
-    }
-
-    public override double GetTotalArea()
-    {
-        return height * width;
-    }
-}
-
-internal class Triangle : Shape
-{
-    private double triangleBase;
-    private double triangleHeight;
-
-    public Triangle(double triangleBase, double triangleHeight)
-    {
-        this.triangleBase = triangleBase;
-        this.triangleHeight = triangleHeight;
-    }
-
-    public override double GetTotalArea()
-    {
-        return (triangleBase * triangleHeight) / 2;
-    }
-}
-
-internal abstract class Shape
-{
-    public abstract double GetTotalArea();
-}
-
-internal class Calculator
-{
-    internal double GetTotalArea(params Shape[] shapes)
-    {
-        return Math.Round(shapes.Sum(s => s.GetTotalArea()), 2);
     }
 }

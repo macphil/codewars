@@ -75,7 +75,7 @@ internal class Square : Rectangle
     }
 }
 
-internal class Circle : Shape
+internal class Circle : IShape
 {
     private double radius;
 
@@ -84,13 +84,10 @@ internal class Circle : Shape
         this.radius = radius;
     }
 
-    public override double GetTotalArea()
-    {
-        return Math.Pow(radius, 2) * Math.PI;
-    }
+    public double Area => Math.Pow(radius, 2) * Math.PI;
 }
 
-internal class Rectangle : Shape
+internal class Rectangle : IShape
 {
     private readonly double width;
     private readonly double height;
@@ -101,13 +98,10 @@ internal class Rectangle : Shape
         this.width = width;
     }
 
-    public override double GetTotalArea()
-    {
-        return height * width;
-    }
+    public double Area => height * width;
 }
 
-internal class Triangle : Shape
+internal class Triangle : IShape
 {
     private double triangleBase;
     private double triangleHeight;
@@ -118,21 +112,18 @@ internal class Triangle : Shape
         this.triangleHeight = triangleHeight;
     }
 
-    public override double GetTotalArea()
-    {
-        return (triangleBase * triangleHeight) / 2;
-    }
+    public double Area => (triangleBase * triangleHeight) / 2;
 }
 
-internal abstract class Shape
+public interface IShape
 {
-    public abstract double GetTotalArea();
+    double Area { get; }
 }
 
-internal class Calculator
+public class Calculator
 {
-    internal double GetTotalArea(params Shape[] shapes)
+    public double GetTotalArea(params IShape[] shapes)
     {
-        return Math.Round(shapes.Sum(s => s.GetTotalArea()), 2);
+        return Math.Round(shapes.Sum(s => s.Area), 2);
     }
 }

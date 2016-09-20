@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using NUnit.Framework;
 
 [TestFixture]
@@ -67,18 +68,10 @@ public class AreaCalculationTests
     }
 }
 
-internal class Square : Shape
+internal class Square : Rectangle
 {
-    private double side;
-
-    public Square(double side)
+    public Square(double side) : base(side, side)
     {
-        this.side = side;
-    }
-
-    public override double GetTotalArea()
-    {
-        return side * side;
     }
 }
 
@@ -140,11 +133,6 @@ internal class Calculator
 {
     internal double GetTotalArea(params Shape[] shapes)
     {
-        var res = 0d;
-        foreach (var shape in shapes)
-        {
-            res += shape.GetTotalArea();
-        }
-        return Math.Round(res, 2);
+        return Math.Round(shapes.Sum(s => s.GetTotalArea()), 2);
     }
 }

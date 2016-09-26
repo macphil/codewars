@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Linq;
+using System.Text;
 using NUnit.Framework;
 
 namespace codewars
@@ -14,20 +15,51 @@ namespace codewars
         [TestCase("%^&*(", ExpectedResult = "%%^^&&**((")]
         public static string FixedTest(string s)
         {
-            return Kata.DoubleChar(s);
+            //var n = 1000;
+
+            //var sw = new Stopwatch();
+            //sw.Start();
+
+            //Kata.DoubleChar(new string('x', n));
+
+            //sw.Stop();
+            //Console.WriteLine($"ohne sb:    {sw.ElapsedMilliseconds:N0}");
+            //sw.Reset();
+            //sw.Start();
+
+            //Kata.DoubleCharSB(new string('x', n));
+
+            //sw.Stop();
+
+            //Console.WriteLine($"mit sb:     {sw.ElapsedMilliseconds:N0}");
+            //sw.Start();
+
+            //Kata.DoubleChar(new string('x', n));
+
+            //sw.Stop();
+            //Console.WriteLine($"ohne sb:    {sw.ElapsedMilliseconds:N0}");
+            //sw.Reset();
+            //sw.Start();
+
+            //Kata.DoubleCharSB(new string('x', n));
+
+            //sw.Stop();
+
+            //Console.WriteLine($"mit sb:     {sw.ElapsedMilliseconds:N0}");
+
+            return Kata.DoubleCharSB(s);
         }
     }
 
     internal class Kata
     {
-        internal static string DoubleChar(string s)
+        internal static string DoubleChar(string s) => s.ToCharArray().Aggregate(string.Empty, (a, c) => a + new string(c, 2));
+
+        internal static string DoubleCharSB(string s)
         {
-            var builder = new System.Text.StringBuilder();
-            foreach (char c in s.ToCharArray())
-            {
-                builder.Append(new string(c, 2));
-            }
-            return builder.ToString();
+            var sb = new StringBuilder();
+            s.ToCharArray().ToList().ForEach(c => sb.Append(new string(c, 2)));
+            return sb.ToString();
         }
     }
 }

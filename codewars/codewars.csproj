@@ -64,6 +64,7 @@
     <Compile Include="Counting Duplicates\DuplicateCountTests.cs" />
     <Compile Include="Descending Order\DescendingOrderTests.cs" />
     <Compile Include="Descending Order\DescendingOrderKata.cs" />
+    <Compile Include="DoubleChar.cs" />
     <Compile Include="GetReadableTime.cs" />
     <Compile Include="Highest_Rank_Number _in_an_Array.cs" />
     <Compile Include="Ipv4Validator.cs" />

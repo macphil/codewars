@@ -22,7 +22,12 @@ namespace codewars
     {
         internal static string DoubleChar(string s)
         {
-            return s;
+            var builder = new System.Text.StringBuilder();
+            foreach (char c in s.ToCharArray())
+            {
+                builder.Append(new string(c, 2));
+            }
+            return builder.ToString();
         }
     }
 }

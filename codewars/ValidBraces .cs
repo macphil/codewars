@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 
 namespace codewars
@@ -10,6 +12,8 @@ namespace codewars
         [TestCase("(}", ExpectedResult = false)]
         [TestCase("[(])", ExpectedResult = false)]
         [TestCase("([{}])", ExpectedResult = true)]
+        [TestCase("}])", ExpectedResult = false)]
+        [TestCase("(})", ExpectedResult = false)]
         public bool ValidBraces_Tests(string actual)
         {
             return Brace.validBraces(actual);
@@ -30,41 +34,31 @@ namespace codewars
     {
         internal static bool validBraces(string braces)
         {
-            var openParentheses = 0;
-            var openBrackets = 0;
-            var openCurlyBraces = 0;
+            Console.WriteLine();
+            var bracesDic = new Dictionary<char, char>();
+            bracesDic.Add(')', '(');
+            bracesDic.Add(']', '[');
+            bracesDic.Add('}', '{');
+
+            var openedBraces = new List<char>();
 
             foreach (char c in braces.ToCharArray())
             {
-                switch (c)
+                if (bracesDic.ContainsValue(c))
                 {
-                    case '[':
-                        openBrackets++;
-                        break;
-
-                    case ']':
-                        openBrackets--;
-                        break;
-
-                    case '{':
-                        openCurlyBraces++;
-                        break;
-
-                    case '}':
-                        openBrackets--;
-                        break;
-
-                    case '(':
-                        openParentheses++;
-                        break;
-
-                    case ')':
-                        openParentheses--;
-                        break;
+                    openedBraces.Add(c);
+                }
+                else if (bracesDic.ContainsKey(c) && openedBraces.Count > 0 && openedBraces.Last().Equals(bracesDic[c]))
+                {
+                    openedBraces.RemoveAt(openedBraces.LastIndexOf(bracesDic[c]));
+                }
+                else
+                {
+                    return false;
                 }
             }
 
-            return openCurlyBraces == 0 && openBrackets == 0 && openParentheses == 0;
+            return openedBraces.Count == 0;
         }
     }
 }

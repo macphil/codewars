@@ -18,22 +18,13 @@ namespace codewars
 
         private string WhatIsTheTime(string timeInMirror)
         {
-            var mirrorMinute = 60 - Convert.ToInt32(timeInMirror.Split(':')[1]);
-            var mirrorHour = 12 - Convert.ToInt32(timeInMirror.Split(':')[0]);
-            if (mirrorMinute == 60)
-            {
-                mirrorMinute = 0;
-            }
-            if (mirrorHour == 13)
-            {
-                mirrorHour--;
-            }
-            if (mirrorHour == 0)
-            {
-                mirrorHour = 12;
-            }
+            DateTime mirrorTime;
 
-            return $"{mirrorHour:D2}:{mirrorMinute:D2}";
+            DateTime.TryParse(timeInMirror, out mirrorTime);
+
+            var twelve = DateTime.Parse("12:00");
+
+            return $"{twelve.AddMinutes((twelve - mirrorTime).TotalMinutes):hh:mm}";
         }
     }
 }

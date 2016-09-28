@@ -49,12 +49,17 @@ namespace codewars
                 fromDec += (double)from.IndexOf(actualChar) * Math.Pow(fromBase, pow++);
             }
 
+            if (fromDec == 0)
+            {
+                return $"{to[0]}";
+            }
+
             var maxPotenz = blubb(fromDec, toBase);
 
-            for (int i = maxPotenz; i >= 0; i--)
+            for (double i = maxPotenz; i >= 0; i--)
             {
                 var maxPowVal = Math.Pow(toBase, i);
-                int x = (int)Math.Floor(fromDec / maxPowVal);
+                int x = 0 + (int)Math.Floor(fromDec / maxPowVal);
 
                 converted += $"{to[x]}";
                 fromDec -= x * maxPowVal;
@@ -63,7 +68,7 @@ namespace codewars
             return converted;
         }
 
-        public static int blubb(double n, int nBase) => System.Convert.ToInt32(Math.Floor(Math.Log(n, nBase)));
+        public static double blubb(double n, int nBase) => Math.Floor(Math.Log(n, nBase));
     }
 
     public class Alphabet

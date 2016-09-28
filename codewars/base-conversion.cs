@@ -32,39 +32,27 @@ namespace codewars
             Console.WriteLine($"convert '{input}' from '{source}' to '{target}'");
 
             var converted = string.Empty;
-
-            if (source.Length == target.Length)
-            {
-                foreach (var actualChar in input.ToCharArray())
-                {
-                    converted += target[source.IndexOf(actualChar)];
-                }
-                return converted;
-            }
-
-            var fromBase = source.Length;
-            var toBase = target.Length;
-            var fromDec = 0d;
-            var pow = 0;
+            var inputAsDecimalRepresentation = 0d;
+            var power = 0;
             foreach (var actualChar in input.ToCharArray().Reverse())
             {
-                fromDec += (double)source.IndexOf(actualChar) * Math.Pow(fromBase, pow++);
+                inputAsDecimalRepresentation += (double)source.IndexOf(actualChar) * Math.Pow(source.Length, power++);
             }
 
-            if (fromDec == 0)
+            if (inputAsDecimalRepresentation == 0)
             {
                 return $"{target[0]}";
             }
 
-            var maxPotenz = Math.Floor(Math.Log(fromDec, toBase));
+            var maxPower = Math.Floor(Math.Log(inputAsDecimalRepresentation, target.Length));
 
-            for (double i = maxPotenz; i >= 0; i--)
+            for (double i = maxPower; i >= 0; i--)
             {
-                var maxPowVal = Math.Pow(toBase, i);
-                int x = 0 + (int)Math.Floor(fromDec / maxPowVal);
+                var maxPowVal = Math.Pow(target.Length, i);
+                var factor = 0 + (int)Math.Floor(inputAsDecimalRepresentation / maxPowVal);
 
-                converted += $"{target[x]}";
-                fromDec -= x * maxPowVal;
+                converted += $"{target[factor]}";
+                inputAsDecimalRepresentation -= factor * maxPowVal;
             }
 
             return converted;

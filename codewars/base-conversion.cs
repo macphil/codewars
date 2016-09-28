@@ -27,48 +27,48 @@ namespace codewars
         [TestCase("SAME", Alphabet.ALPHA_UPPER, Alphabet.ALPHA_LOWER, ExpectedResult = "same")]
         public string Convert_Tests(string actual, String from, String to) => Convert(actual, @from, to);
 
-        private static string Convert(string actual, string from, string to)
+        private static string Convert(string input, string source, string target)
         {
+            Console.WriteLine($"convert '{input}' from '{source}' to '{target}'");
+
             var converted = string.Empty;
 
-            if (from.Length == to.Length)
+            if (source.Length == target.Length)
             {
-                foreach (var actualChar in actual.ToCharArray())
+                foreach (var actualChar in input.ToCharArray())
                 {
-                    converted += to[from.IndexOf(actualChar)];
+                    converted += target[source.IndexOf(actualChar)];
                 }
                 return converted;
             }
 
-            var fromBase = from.Length;
-            var toBase = to.Length;
+            var fromBase = source.Length;
+            var toBase = target.Length;
             var fromDec = 0d;
             var pow = 0;
-            foreach (var actualChar in actual.ToCharArray().Reverse())
+            foreach (var actualChar in input.ToCharArray().Reverse())
             {
-                fromDec += (double)from.IndexOf(actualChar) * Math.Pow(fromBase, pow++);
+                fromDec += (double)source.IndexOf(actualChar) * Math.Pow(fromBase, pow++);
             }
 
             if (fromDec == 0)
             {
-                return $"{to[0]}";
+                return $"{target[0]}";
             }
 
-            var maxPotenz = blubb(fromDec, toBase);
+            var maxPotenz = Math.Floor(Math.Log(fromDec, toBase));
 
             for (double i = maxPotenz; i >= 0; i--)
             {
                 var maxPowVal = Math.Pow(toBase, i);
                 int x = 0 + (int)Math.Floor(fromDec / maxPowVal);
 
-                converted += $"{to[x]}";
+                converted += $"{target[x]}";
                 fromDec -= x * maxPowVal;
             }
 
             return converted;
         }
-
-        public static double blubb(double n, int nBase) => Math.Floor(Math.Log(n, nBase));
     }
 
     public class Alphabet

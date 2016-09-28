@@ -86,6 +86,7 @@
     <Compile Include="Archive\ToRomanNumerals %28ccd-school%29\ToRomanNumerals.Tests.cs" />
     <Compile Include="Archive\ToRomanNumerals\ToRomanNumeralsKata.cs" />
     <Compile Include="Archive\zebulans-nightmare.cs" />
+    <Compile Include="base-conversion.cs" />
     <Compile Include="clock-in-mirror.cs" />
     <Compile Include="ValidBraces .cs" />
   </ItemGroup>

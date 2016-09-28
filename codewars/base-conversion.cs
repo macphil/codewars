@@ -29,7 +29,7 @@ namespace codewars
 
         private static string Convert(string actual, string from, string to)
         {
-            string converted = string.Empty;
+            var converted = string.Empty;
 
             if (from.Length == to.Length)
             {
@@ -40,30 +40,30 @@ namespace codewars
                 return converted;
             }
 
-            int fromBase = from.Length;
-            int toBase = to.Length;
-            double fromDec = 0d;
+            var fromBase = from.Length;
+            var toBase = to.Length;
+            var fromDec = 0d;
             var pow = 0;
             foreach (var actualChar in actual.ToCharArray().Reverse())
             {
                 fromDec += (double)from.IndexOf(actualChar) * Math.Pow(fromBase, pow++);
             }
 
-            //foreach (var actualChar in actual.ToCharArray())
-            //{
-            //    int posFrom = from.IndexOf(actualChar);
-            //    while (posFrom > toBase)
-            //    {
-            //        converted += to.ToCharArray()[posFrom % toBase];
-            //        posFrom -= toBase;
-            //    }
-            //    converted += to.ToCharArray()[posFrom];
-            //}
+            var maxPotenz = blubb(fromDec, toBase);
 
-            return $"{fromDec}";
+            for (int i = maxPotenz; i >= 0; i--)
+            {
+                var maxPowVal = Math.Pow(toBase, i);
+                int x = (int)Math.Floor(fromDec / maxPowVal);
+
+                converted += $"{to[x]}";
+                fromDec -= x * maxPowVal;
+            }
+
+            return converted;
         }
 
-        public int blubb(int n, int nBase) => System.Convert.ToInt32(Math.Floor(Math.Log(n, nBase)));
+        public static int blubb(double n, int nBase) => System.Convert.ToInt32(Math.Floor(Math.Log(n, nBase)));
     }
 
     public class Alphabet

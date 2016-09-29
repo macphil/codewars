@@ -88,6 +88,7 @@
     <Compile Include="Archive\zebulans-nightmare.cs" />
     <Compile Include="base-conversion.cs" />
     <Compile Include="clock-in-mirror.cs" />
+    <Compile Include="FileNamePattern.cs" />
     <Compile Include="ValidBraces .cs" />
   </ItemGroup>
   <ItemGroup>

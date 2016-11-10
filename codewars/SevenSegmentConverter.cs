@@ -58,6 +58,27 @@ namespace codewars
 
         private OnOff TopRightVertical { get; set; } = OnOff.Off;
 
+        /*
+       1_Bottom-Right Vertical
+       2_Bottom-Left Vertical
+       3_Top-Right Vertical
+       4_Top-Left Vertical
+       5_Bottom Horizontal
+       6_Middle Horizontal
+       7_Top Horizontal
+       */
+
+        public string BinaryRepresentation()
+        {
+            return $"{(short)BottomRightVertical}" +
+             $"{(short)BottomLeftVertical}" +
+             $"{(short)TopRightVertical}" +
+             $"{(short)TopLeftVertical}" +
+             $"{(short)BottomHorizontal}" +
+             $"{(short)MiddleHorizontal}" +
+            $"{(short)TopHorizontal}";
+        }
+
         public override string ToString()
         {
             var middle = new string(' ', 3);
@@ -106,6 +127,13 @@ namespace codewars
         {
             Console.WriteLine(new SevenSegment().Four.ToString());
             return SevenSegmentNumber(actual);
+        }
+
+        [Test]
+        [TestCase(4, ExpectedResult = "1011010")]
+        public string SevenSegmentConverterTests_BinaryRepresentation(int actual)
+        {
+            return new SevenSegment().Four.BinaryRepresentation();
         }
     }
 }

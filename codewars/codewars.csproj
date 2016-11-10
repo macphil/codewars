@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SevenSegmentConverter.cs" />
     <Compile Include="Archive\AreaCalculation\AreaCalculationTests.cs" />
     <Compile Include="Archive\AreaCalculation\Calculator.cs" />
     <Compile Include="Archive\AreaCalculation\Circle.cs" />

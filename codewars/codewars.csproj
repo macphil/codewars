@@ -90,6 +90,7 @@
     <Compile Include="clock-in-mirror.cs" />
     <Compile Include="FileNamePattern.cs" />
     <Compile Include="heavy-metal-umlauts.cs" />
+    <Compile Include="large-factorials.cs" />
     <Compile Include="ookkk-ok-o-ook-ok-ooo.cs" />
     <Compile Include="ValidBraces .cs" />
   </ItemGroup>

@@ -58,6 +58,17 @@ namespace codewars
 
         private OnOff TopRightVertical { get; set; } = OnOff.Off;
 
+        public string BinaryRepresentation() =>
+            $"{(short)BottomRightVertical}" +
+            $"{(short)BottomLeftVertical}" +
+            $"{(short)TopRightVertical}" +
+            $"{(short)TopLeftVertical}" +
+            $"{(short)BottomHorizontal}" +
+            $"{(short)MiddleHorizontal}" +
+            $"{(short)TopHorizontal}";
+
+        public int SevenSegmentNumber(int number) => Convert.ToByte(Four.BinaryRepresentation(), 2);
+
         /*
        1_Bottom-Right Vertical
        2_Bottom-Left Vertical
@@ -67,17 +78,6 @@ namespace codewars
        6_Middle Horizontal
        7_Top Horizontal
        */
-
-        public string BinaryRepresentation()
-        {
-            return $"{(short)BottomRightVertical}" +
-             $"{(short)BottomLeftVertical}" +
-             $"{(short)TopRightVertical}" +
-             $"{(short)TopLeftVertical}" +
-             $"{(short)BottomHorizontal}" +
-             $"{(short)MiddleHorizontal}" +
-            $"{(short)TopHorizontal}";
-        }
 
         public override string ToString()
         {
@@ -118,7 +118,7 @@ namespace codewars
     {
         public static int SevenSegmentNumber(int number)
         {
-            return number;
+            return new SevenSegment().Four.SevenSegmentNumber(number);
         }
 
         [Test]

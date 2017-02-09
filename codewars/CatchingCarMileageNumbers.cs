@@ -5,27 +5,100 @@ namespace codewars
 {
     public class CatchingCarMileageNumbers
     {
+        public enum NumberIs
+        {
+            Interesting = 2,
+            NearbyInteresting = 1,
+            Booring = 0
+        };
+
         public static int IsInteresting(int number, List<int> awesomePhrases)
         {
-            return -1;
+            var result = NumberIs.Booring;
+
+            if (!NumberIsInRange(number))
+            {
+                return (int)result;
+            }
+
+            result = CheckForDigitFollowedByAllZeros(number);
+            if (result == NumberIs.Booring)
+            {
+                result = CheckForEveryDigitIsTheSameNumber(number);
+            }
+
+            if (result == NumberIs.Booring)
+            {
+                result = CheckForSequence(number);
+            }
+
+            if (result == NumberIs.Booring)
+            {
+                result = CheckForPalindrome(number);
+            }
+
+            if (result == NumberIs.Booring)
+            {
+                result = CheckForAwesomePhrases(number, awesomePhrases);
+            }
+
+            return (int)result;
+            /*
+             *
+    Any digit followed by all zeros: 100, 90000
+    Every digit is the same number: 1111
+    The digits are sequential, incementing†: 1234
+    The digits are sequential, decrementing‡: 4321
+    The digits are a palindrome: 1221 or 73837
+    The digits match one of the values in the awesomePhrases array
+
+             *
+             */
         }
 
         [Test]
-        [TestCase("", ExpectedResult = "")]
-        public string CatchingCarMileageNumbers_Tests(string actual)
+        [TestCase(3, ExpectedResult = 0)]
+        [TestCase(99, ExpectedResult = 0)]
+        [TestCase(1336, ExpectedResult = 1)]
+        [TestCase(1337, ExpectedResult = 2)]
+        [TestCase(11208, ExpectedResult = 0)]
+        [TestCase(11209, ExpectedResult = 1)]
+        [TestCase(11210, ExpectedResult = 2)]
+        [TestCase(1000000000, ExpectedResult = 0)]
+        [TestCase(1000000001, ExpectedResult = 0)]
+        public int CatchingCarMileageNumbers_Tests(int numberToTest)
         {
-            return actual;
+            return IsInteresting(numberToTest, new List<int> { 1337, 256 });
         }
 
-        [Test]
-        public void ShouldWorkTest()
+        private static NumberIs CheckForAwesomePhrases(int number, List<int> awesomePhrases)
         {
-            Assert.AreEqual(0, IsInteresting(3, new List<int>() { 1337, 256 }));
-            Assert.AreEqual(1, IsInteresting(1336, new List<int>() { 1337, 256 }));
-            Assert.AreEqual(2, IsInteresting(1337, new List<int>() { 1337, 256 }));
-            Assert.AreEqual(0, IsInteresting(11208, new List<int>() { 1337, 256 }));
-            Assert.AreEqual(1, IsInteresting(11209, new List<int>() { 1337, 256 }));
-            Assert.AreEqual(2, IsInteresting(11211, new List<int>() { 1337, 256 }));
+            return NumberIs.Booring;
+        }
+
+        private static NumberIs CheckForDigitFollowedByAllZeros(int number)
+        {
+            return NumberIs.Booring;
+        }
+
+        private static NumberIs CheckForEveryDigitIsTheSameNumber(int number)
+        {
+            return NumberIs.Booring;
+        }
+
+        private static NumberIs CheckForPalindrome(int number)
+        {
+            return NumberIs.Booring;
+        }
+
+        private static NumberIs CheckForSequence(int number)
+        {
+            return NumberIs.Booring;
+        }
+
+        private static bool NumberIsInRange(int number)
+        {
+            return (number <= 99 || number >= 1000000000);
         }
     }
 }

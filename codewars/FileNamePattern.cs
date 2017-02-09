@@ -43,7 +43,8 @@ namespace codewars
                 if (bracketClose > bracketOpen + 1)
                 {
                     var dateTimePattern = actual.Substring(bracketOpen + 1, bracketClose - bracketOpen - 1);
-                    actual = actual.Substring(0, bracketOpen) + DateTime.Now.ToString(dateTimePattern) + actual.Substring(bracketClose + 1);
+                    var dateIn2016 = new DateTime(2016, 6, 10);
+                    actual = actual.Substring(0, bracketOpen) + dateIn2016.ToString(dateTimePattern) + actual.Substring(bracketClose + 1);
                 }
             }
 

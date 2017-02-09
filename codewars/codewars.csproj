@@ -51,7 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SevenSegmentConverter.cs" />
+    <Compile Include="7Segment\SevenSegment.cs" />
+    <Compile Include="7Segment\SevenSegmentConverter.cs" />
     <Compile Include="Archive\AreaCalculation\AreaCalculationTests.cs" />
     <Compile Include="Archive\AreaCalculation\Calculator.cs" />
     <Compile Include="Archive\AreaCalculation\Circle.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="heavy-metal-umlauts.cs" />
     <Compile Include="large-factorials.cs" />
     <Compile Include="ookkk-ok-o-ook-ok-ooo.cs" />
+    <Compile Include="Possibilities.cs" />
     <Compile Include="ValidBraces .cs" />
   </ItemGroup>
   <ItemGroup>

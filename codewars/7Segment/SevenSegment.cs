@@ -53,7 +53,7 @@ namespace codewars._7Segment
         {SevenSegmentLED.TopHorizontal, SevenSegmentLED.TopRightVertical, SevenSegmentLED.BottomRightVertical, SevenSegmentLED.BottomHorizontal, SevenSegmentLED.BottomLeftVertical, SevenSegmentLED.TopLeftVertical, SevenSegmentLED.MiddleHorizontal});
 
         public static SevenSegment Nr9 => new SevenSegment(new List<SevenSegmentLED>
-        {SevenSegmentLED.TopHorizontal, SevenSegmentLED.TopRightVertical, SevenSegmentLED.MiddleHorizontal, SevenSegmentLED.TopLeftVertical, SevenSegmentLED.BottomRightVertical, SevenSegmentLED.BottomHorizontal});
+        {SevenSegmentLED.TopHorizontal, SevenSegmentLED.TopRightVertical, SevenSegmentLED.MiddleHorizontal, SevenSegmentLED.TopLeftVertical, SevenSegmentLED.BottomRightVertical});
 
         public override string ToString()
         {

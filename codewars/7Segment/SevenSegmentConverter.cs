@@ -42,7 +42,7 @@ namespace codewars
                     return SevenSegment.Nr9.Value();
 
                 default:
-                    throw new ArgumentException($"Number '{number}' is out of range");
+                    return -1;
             }
         }
 

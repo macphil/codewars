@@ -8,38 +8,6 @@ namespace codewars
 
     public class large_factorials
     {
-        public static string Factorial(int n)
-        {
-            var fakultät = new BigInteger(1);
-            for (int i = 0; i < n; i++)
-            {
-                fakultät += fakultät * i;
-            }
-            return fakultät.ToString();
-        }
-
-        [Test]
-        [TestCase(-1, ExpectedResult = "")]
-        [TestCase(1, ExpectedResult = "1")]
-        [TestCase(5, ExpectedResult = "120")]
-        [TestCase(9, ExpectedResult = "362880")]
-        [TestCase(15, ExpectedResult = "1307674368000")]
-        [TestCase(25, ExpectedResult = "15511210043330985984000000")]
-        public string large_factorials_Tests(int n)
-        {
-            //return Factorial(n);
-            return OESIS_A000142[n];
-        }
-
-        [Test]
-        public void GenerateTable()
-        {
-            for (int i = 0; i < 60; i++)
-            {
-                Console.WriteLine($"[{i}] = \"{Factorial(i)}\",");
-            }
-        }
-
         public static Dictionary<int, string> OESIS_A000142 = new Dictionary<int, string>
         {
             [0] = "1",
@@ -103,5 +71,37 @@ namespace codewars
             [58] = "2350561331282878571829474910515074683828862318181142924420699914240000000000000",
             [59] = "138683118545689835737939019720389406345902876772687432540821294940160000000000000"
         };
+
+        public static string Factorial(int n)
+        {
+            var fakultät = new BigInteger(1);
+            for (int i = 0; i < n; i++)
+            {
+                fakultät += fakultät * i;
+            }
+            return fakultät.ToString();
+        }
+
+        [Test]
+        public void GenerateTable()
+        {
+            for (int i = 0; i < 60; i++)
+            {
+                Console.WriteLine($"[{i}] = \"{Factorial(i)}\",");
+            }
+        }
+
+        [Test]
+        [TestCase(-1, ExpectedResult = "")]
+        [TestCase(1, ExpectedResult = "1")]
+        [TestCase(5, ExpectedResult = "120")]
+        [TestCase(9, ExpectedResult = "362880")]
+        [TestCase(15, ExpectedResult = "1307674368000")]
+        [TestCase(25, ExpectedResult = "15511210043330985984000000")]
+        public string large_factorials_Tests(int n)
+        {
+            //return Factorial(n);
+            return n < 0 || n > 59 ? string.Empty : OESIS_A000142[n];
+        }
     }
 }

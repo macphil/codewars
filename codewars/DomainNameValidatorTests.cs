@@ -14,6 +14,7 @@ namespace codewars
         [TestCase("codewars", ExpectedResult = false)]
         [TestCase(".codewars.com", ExpectedResult = false)]
         [TestCase("127.0.0.1", ExpectedResult = false)]
+        [TestCase("no.1", ExpectedResult = false)]
         [TestCase("L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L", ExpectedResult = false)]
         [TestCase("L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L", ExpectedResult = true)]
         [TestCase("codewars.com-", ExpectedResult = false)]
@@ -53,8 +54,8 @@ namespace codewars
           [x] Domain name may contain subdomains (levels), hierarchically separated by . (period) character
           [x] Domain name must not contain more than 127 levels, including top level (TLD)
           [x] Domain name must not be longer than 253 characters (RFC specifies 255, but 2 characters are reserved for trailing dot and null character for root level)
-          [_] Level names must be composed out of lowercase and uppercase ASCII letters, digits and - (minus sign) character
-          [_] Level names must not start or end with - (minus sign) character
+          [x] Level names must be composed out of lowercase and uppercase ASCII letters, digits and - (minus sign) character
+          [x] Level names must not start or end with - (minus sign) character
           [x] Level names must not be longer than 63 characters
           [_] Top level (TLD) must not be fully numerical
 
@@ -69,12 +70,19 @@ namespace codewars
         public bool validate(string domain)
         {
             if (!ValidateStringLength(domain, 253)) return false;
+            if (domain.StartsWith(".") || domain.EndsWith(".")) return false;
+
             var levels = domain.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
             if (levels.Length < 2 || levels.Length > 127)
             {
                 return false;
             }
             if (levels.Any(level => !ValidateLevel(level)))
+            {
+                return false;
+            }
+
+            if (Regex.IsMatch(levels.Last(), @"^[\d]*$", RegexOptions.IgnoreCase))
             {
                 return false;
             }

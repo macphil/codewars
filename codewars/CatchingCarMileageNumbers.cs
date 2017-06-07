@@ -20,29 +20,35 @@ namespace codewars
             {
                 return (int)result;
             }
-
-            result = CheckForDigitFollowedByAllZeros(number);
-            if (result == NumberIs.Booring)
+            var currentNumber = number;
+            while (result == NumberIs.Booring && currentNumber - number <= 2)
             {
-                result = CheckForEveryDigitIsTheSameNumber(number);
+                result = CheckForDigitFollowedByAllZeros(currentNumber);
+                //if (CheckForDigitFollowedByAllZeros(currentNumber))
+                //{
+                //    result = CheckForEveryDigitIsTheSameNumber(currentNumber);
+                //}
+
+                if (result == NumberIs.Booring)
+                {
+                    result = CheckForSequence(currentNumber);
+                }
+
+                if (result == NumberIs.Booring)
+                {
+                    result = CheckForPalindrome(currentNumber);
+                }
+
+                if (result == NumberIs.Booring)
+                {
+                    result = CheckForAwesomePhrases(currentNumber, awesomePhrases);
+                }
+                currentNumber++;
             }
 
-            if (result == NumberIs.Booring)
-            {
-                result = CheckForSequence(number);
-            }
+            return
 
-            if (result == NumberIs.Booring)
-            {
-                result = CheckForPalindrome(number);
-            }
-
-            if (result == NumberIs.Booring)
-            {
-                result = CheckForAwesomePhrases(number, awesomePhrases);
-            }
-
-            return (int)result;
+            (int)result;
             /*
              *
     Any digit followed by all zeros: 100, 90000
@@ -78,6 +84,8 @@ namespace codewars
 
         private static NumberIs CheckForDigitFollowedByAllZeros(int number)
         {
+            // Any digit followed by all zeros: 100, 90000
+
             return NumberIs.Booring;
         }
 

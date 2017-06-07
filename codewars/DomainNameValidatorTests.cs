@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 using NUnit.Framework;
 
 namespace codewars
@@ -19,7 +20,16 @@ namespace codewars
         [TestCase("example@codewars.com", ExpectedResult = false)]
         [TestCase("CODEWARS.COM", ExpectedResult = true)]
         [TestCase("codewars.com", ExpectedResult = true)]
+        [TestCase("123.codewars.com", ExpectedResult = true)]
+        [TestCase("nö.codewars.com", ExpectedResult = false)]
+        [TestCase("x#x.codewars.com", ExpectedResult = false)]
         [TestCase("g.co", ExpectedResult = true)]
+        [TestCase("g.-x-.co", ExpectedResult = false)]
+        [TestCase("g.x-.co", ExpectedResult = false)]
+        [TestCase("g.-x.co", ExpectedResult = false)]
+        [TestCase("g.--.co", ExpectedResult = false)]
+        [TestCase("g.-.co", ExpectedResult = false)]
+        [TestCase("sub.code-wars.com", ExpectedResult = true)]
         [TestCase("sub.codewars.com", ExpectedResult = true)]
         public bool DomainNameValidator_Tests(string actual)
         {
@@ -80,8 +90,8 @@ namespace codewars
         private bool ValidateLevel(string level)
         {
             if (!ValidateStringLength(level, 63)) return false;
-
-            return true;
+            if (level.StartsWith("-") || level.EndsWith("-")) return false;
+            return Regex.IsMatch(level, @"^[A-Z0-9-]*$", RegexOptions.IgnoreCase);
         }
     }
 }

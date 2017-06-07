@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Text.RegularExpressions;
 using NUnit.Framework;
 
@@ -31,7 +30,11 @@ namespace codewars
         [TestCase("g.--.co", ExpectedResult = false)]
         [TestCase("g.-.co", ExpectedResult = false)]
         [TestCase("sub.code-wars.com", ExpectedResult = true)]
-        [TestCase("sub.codewars.com", ExpectedResult = true)]
+        [TestCase(".", ExpectedResult = false)]
+        [TestCase(".com", ExpectedResult = false)]
+        [TestCase("example.", ExpectedResult = false)]
+        [TestCase("example.com.", ExpectedResult = false)]
+        [TestCase("example..com", ExpectedResult = false)]
         public bool DomainNameValidator_Tests(string actual)
         {
             return v.validate(actual);
@@ -57,7 +60,7 @@ namespace codewars
           [x] Level names must be composed out of lowercase and uppercase ASCII letters, digits and - (minus sign) character
           [x] Level names must not start or end with - (minus sign) character
           [x] Level names must not be longer than 63 characters
-          [_] Top level (TLD) must not be fully numerical
+          [x] Top level (TLD) must not be fully numerical
 
         Additionally, in this kata
 
@@ -72,7 +75,7 @@ namespace codewars
             if (!ValidateStringLength(domain, 253)) return false;
             if (domain.StartsWith(".") || domain.EndsWith(".")) return false;
 
-            var levels = domain.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
+            var levels = domain.Split(new[] { '.' });
             if (levels.Length < 2 || levels.Length > 127)
             {
                 return false;

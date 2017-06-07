@@ -104,6 +104,7 @@
     <Compile Include="base-conversion.cs" />
     <Compile Include="CatchingCarMileageNumbers.cs" />
     <Compile Include="clock-in-mirror.cs" />
+    <Compile Include="DomainNameValidatorTests.cs" />
     <Compile Include="FileNamePattern.cs" />
     <Compile Include="FolderSort\FolderSortTests.cs" />
     <Compile Include="heavy-metal-umlauts.cs" />

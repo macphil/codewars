@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using NUnit.Framework;
 
 namespace codewars
@@ -39,13 +40,13 @@ namespace codewars
 
         For purposes of this kata, following rules apply:
 
-            Domain name may contain subdomains (levels), hierarchically separated by . (period) character
-            Domain name must not contain more than 127 levels, including top level (TLD)
-            Domain name must not be longer than 253 characters (RFC specifies 255, but 2 characters are reserved for trailing dot and null character for root level)
-            Level names must be composed out of lowercase and uppercase ASCII letters, digits and - (minus sign) character
-            Level names must not start or end with - (minus sign) character
-            Level names must not be longer than 63 characters
-            Top level (TLD) must not be fully numerical
+          [x] Domain name may contain subdomains (levels), hierarchically separated by . (period) character
+          [x] Domain name must not contain more than 127 levels, including top level (TLD)
+          [x] Domain name must not be longer than 253 characters (RFC specifies 255, but 2 characters are reserved for trailing dot and null character for root level)
+          [_] Level names must be composed out of lowercase and uppercase ASCII letters, digits and - (minus sign) character
+          [_] Level names must not start or end with - (minus sign) character
+          [x] Level names must not be longer than 63 characters
+          [_] Top level (TLD) must not be fully numerical
 
         Additionally, in this kata
 
@@ -57,9 +58,13 @@ namespace codewars
 
         public bool validate(string domain)
         {
-            if (!ValidateDomainLength(domain)) return false;
+            if (!ValidateStringLength(domain, 253)) return false;
             var levels = domain.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
             if (levels.Length < 2 || levels.Length > 127)
+            {
+                return false;
+            }
+            if (levels.Any(level => !ValidateLevel(level)))
             {
                 return false;
             }
@@ -67,9 +72,16 @@ namespace codewars
             return true;
         }
 
-        private static bool ValidateDomainLength(string domain)
+        private static bool ValidateStringLength(string stringToValidate, int maxLength)
         {
-            return !string.IsNullOrWhiteSpace(domain) && domain.Trim().Length <= 253;
+            return !string.IsNullOrWhiteSpace(stringToValidate) && stringToValidate.Trim().Length <= maxLength;
+        }
+
+        private bool ValidateLevel(string level)
+        {
+            if (!ValidateStringLength(level, 63)) return false;
+
+            return true;
         }
     }
 }

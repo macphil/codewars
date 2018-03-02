@@ -1,86 +1,13 @@
-﻿using System.Linq;
-
-namespace codewars
+﻿namespace codewars
 {
     using System;
     using System.Collections;
-    using System.Collections.Generic;
-    using System.Security.Cryptography.X509Certificates;
+    using System.Linq;
     using NUnit.Framework;
-    using NUnit.Framework.Constraints;
 
     /// <summary>
     /// see https://www.codewars.com/kata/sudoku-solution-validator/csharp
     /// </summary>
-
-    class Sudoku
-    {
-        public static bool ValidateSolution(int[][] board)
-        {
-            return ValidateRows(board) && ValidateColumns(board) && ValidateBlocks(board);
-        }
-
-        internal static bool ValidateBlocks(int[][] board)
-        {
-            for (int i = 0; i < board.Length; i++)
-            {
-                var sequenceToTest = GetBlockSequence(board, i);
-                if (!ValidateSequence(sequenceToTest))
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        private static int[] GetBlockSequence(int[][] board, int block)
-        {
-            var blockWidth = (int)Math.Floor(Math.Sqrt(board.Length));
-            int x = (block % blockWidth) * blockWidth;
-            int y = (block / blockWidth) * blockWidth;
-
-            var sequenceToTest = new int[board.Length];
-            int pos = 0;
-
-            for (int i = 0; i < blockWidth; i++)
-            {
-                for (int j = 0; j < blockWidth; j++)
-                {
-                    sequenceToTest[pos++] = board[x + i][y + j];
-                }
-            }
-
-            return sequenceToTest;
-        }
-
-        internal static bool ValidateColumns(int[][] board)
-        {
-            for (var row = 0; row < board.Length; row++)
-            {
-                var sequenceToTest = new int[board.Length];
-                for (var column = 0; column < board.First().Length; column++)
-                {
-                    sequenceToTest[column] = board[column][row];
-                }
-                if (!ValidateSequence(sequenceToTest))
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        internal static bool ValidateRows(int[][] board) => board.All(ValidateSequence);
-
-        internal static bool ValidateSequence(int[] sequenceToTest)
-        {
-            if (sequenceToTest.Any(x => x == 0) || sequenceToTest.Any(x => x > sequenceToTest.Length))
-            {
-                return false;
-            }
-            return sequenceToTest.Distinct().Count() == sequenceToTest.Length;
-        }
-    }
 
     [TestFixture]
     public class Sample_Tests
@@ -163,15 +90,12 @@ namespace codewars
                 yield return new TestCaseData(new[] { 1, 3 }).Returns(false);
                 yield return new TestCaseData(new[] { 5, 3, 4, 6, 7, 8, 9, 1, 2 }).Returns(true);
                 yield return new TestCaseData(new[] { 3, 0, 0, 2, 8, 6, 1, 7, 9 }).Returns(false);
+                yield return new TestCaseData(new[] { -1, 1 }).Returns(false);
             }
         }
 
         [Test, TestCaseSource("testCases")]
         public void Test(bool expected, int[][] board) => Assert.AreEqual(expected, Sudoku.ValidateSolution(board));
-
-        [Test]
-        [TestCaseSource(nameof(TestSequences))]
-        public bool TestValidateSequence(int[] sequenceToTest) => Sudoku.ValidateSequence(sequenceToTest);
 
         [Test]
         public void TestValidateBlocks()
@@ -195,6 +119,71 @@ namespace codewars
 
             // assert
             Assert.That(isValid, Is.False);
+        }
+
+        [Test]
+        [TestCaseSource(nameof(TestSequences))]
+        public bool TestValidateSequence(int[] sequenceToTest) => Sudoku.ValidateSequence(sequenceToTest);
+    }
+
+    internal class Sudoku
+    {
+        public static bool ValidateSolution(int[][] board)
+        {
+            return ValidateRows(board) && ValidateColumns(board) && ValidateBlocks(board);
+        }
+
+        internal static bool ValidateBlocks(int[][] board)
+        {
+            return board.Select((t, i) => GetBlockSequence(board, i)).All(ValidateSequence);
+        }
+
+        internal static bool ValidateColumns(int[][] board)
+        {
+            for (var row = 0; row < board.Length; row++)
+            {
+                var sequenceToTest = new int[board.Length];
+                for (var column = 0; column < board.First().Length; column++)
+                {
+                    sequenceToTest[column] = board[column][row];
+                }
+                if (!ValidateSequence(sequenceToTest))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        internal static bool ValidateRows(int[][] board) => board.All(ValidateSequence);
+
+        internal static bool ValidateSequence(int[] sequenceToTest)
+        {
+            if (sequenceToTest.Any(x => x <= 0) || sequenceToTest.Any(x => x > sequenceToTest.Length))
+            {
+                return false;
+            }
+            return sequenceToTest.Distinct().Count() == sequenceToTest.Length;
+        }
+
+        private static int[] GetBlockSequence(int[][] board, int block)
+        {
+            var blockWidth = (int)Math.Floor(Math.Sqrt(board.Length));
+            var x = (block % blockWidth) * blockWidth;
+            var y = (block / blockWidth) * blockWidth;
+
+            var sequenceToTest = new int[board.Length];
+            var pos = 0;
+
+            for (var i = 0; i < blockWidth; i++)
+            {
+                for (var j = 0; j < blockWidth; j++)
+                {
+                    sequenceToTest[pos++] = board[x + i][y + j];
+                }
+            }
+
+            return sequenceToTest;
         }
     }
 }

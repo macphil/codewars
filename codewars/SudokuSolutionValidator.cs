@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 
 namespace codewars
 {
+    using System.Collections;
+    using System.Collections.Generic;
     using NUnit.Framework;
 
     /// <summary>
@@ -17,6 +15,11 @@ namespace codewars
         public static bool ValidateSolution(int[][] board)
         {
             return false;
+        }
+
+        public static bool ValidateSequence(int[] sequenceToTest)
+        {
+            return sequenceToTest.Distinct().Count() == sequenceToTest.Length;
         }
     }
 
@@ -59,7 +62,19 @@ namespace codewars
             },
         };
 
+        public static IEnumerable TestSequences
+        {
+            get
+            {
+                yield return new TestCaseData(new[] { 1, 2 }).Returns(true);
+            }
+        }
+
         [Test, TestCaseSource("testCases"), Ignore("not yet implemented")]
         public void Test(bool expected, int[][] board) => Assert.AreEqual(expected, Sudoku.ValidateSolution(board));
+
+        [Test]
+        [TestCaseSource(nameof(TestSequences))]
+        public bool TestValidateSequence(int[] sequenceToTest) => Sudoku.ValidateSequence(sequenceToTest);
     }
 }

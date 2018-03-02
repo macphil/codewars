@@ -35,62 +35,10 @@ namespace codewars
 
         private static int[] GetBlockSequence(int[][] board, int block)
         {
-            int x = 0;
-            int y = 0;
-            switch (block)
-            {
-                case 0:
-                    x = 0;
-                    y = 0;
-                    break;
-
-                case 1:
-                    x = 3;
-                    y = 0;
-                    break;
-
-                case 2:
-                    x = 6;
-                    y = 0;
-                    break;
-
-                case 3:
-                    x = 0;
-                    y = 3;
-                    break;
-
-                case 4:
-                    x = 3;
-                    y = 3;
-                    break;
-
-                case 5:
-                    x = 6;
-                    y = 3;
-                    break;
-
-                case 6:
-                    x = 0;
-                    y = 6;
-                    break;
-
-                case 7:
-                    x = 3;
-                    y = 6;
-                    break;
-
-                case 8:
-                    x = 6;
-                    y = 6;
-                    break;
-
-                default:
-                    x = 0;
-                    y = 0;
-                    break;
-            }
-
             var blockWidth = (int)Math.Floor(Math.Sqrt(board.Length));
+            int x = (block % blockWidth) * blockWidth;
+            int y = (block / blockWidth) * blockWidth;
+
             var sequenceToTest = new int[board.Length];
             int pos = 0;
 

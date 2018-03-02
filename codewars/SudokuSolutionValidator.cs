@@ -2,6 +2,7 @@
 
 namespace codewars
 {
+    using System;
     using System.Collections;
     using System.Collections.Generic;
     using NUnit.Framework;
@@ -14,10 +15,15 @@ namespace codewars
     {
         public static bool ValidateSolution(int[][] board)
         {
-            return false;
+            return ValidateRows(board);
         }
 
-        public static bool ValidateSequence(int[] sequenceToTest)
+        internal static bool ValidateRows(int[][] board)
+        {
+            return board.All(row => ValidateSequence(row));
+        }
+
+        internal static bool ValidateSequence(int[] sequenceToTest)
         {
             if (sequenceToTest.Any(x => x == 0) || sequenceToTest.Any(x => x > sequenceToTest.Length))
             {
@@ -79,7 +85,7 @@ namespace codewars
             }
         }
 
-        [Test, TestCaseSource("testCases"), Ignore("not yet implemented")]
+        [Test, TestCaseSource("testCases")]
         public void Test(bool expected, int[][] board) => Assert.AreEqual(expected, Sudoku.ValidateSolution(board));
 
         [Test]

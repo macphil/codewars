@@ -19,6 +19,10 @@ namespace codewars
 
         public static bool ValidateSequence(int[] sequenceToTest)
         {
+            if (sequenceToTest.Any(x => x == 0) || sequenceToTest.Any(x => x > sequenceToTest.Length))
+            {
+                return false;
+            }
             return sequenceToTest.Distinct().Count() == sequenceToTest.Length;
         }
     }
@@ -67,6 +71,11 @@ namespace codewars
             get
             {
                 yield return new TestCaseData(new[] { 1, 2 }).Returns(true);
+                yield return new TestCaseData(new[] { 1, 1 }).Returns(false);
+                yield return new TestCaseData(new[] { 1, 0 }).Returns(false);
+                yield return new TestCaseData(new[] { 1, 3 }).Returns(false);
+                yield return new TestCaseData(new[] { 5, 3, 4, 6, 7, 8, 9, 1, 2 }).Returns(true);
+                yield return new TestCaseData(new[] { 3, 0, 0, 2, 8, 6, 1, 7, 9 }).Returns(false);
             }
         }
 

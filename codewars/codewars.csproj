@@ -111,6 +111,7 @@
     <Compile Include="large-factorials.cs" />
     <Compile Include="ookkk-ok-o-ook-ok-ooo.cs" />
     <Compile Include="Possibilities.cs" />
+    <Compile Include="Runes.cs" />
     <Compile Include="SudokuSolutionValidator.cs" />
     <Compile Include="ValidBraces .cs" />
   </ItemGroup>

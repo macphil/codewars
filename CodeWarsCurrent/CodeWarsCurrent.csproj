@@ -7,7 +7,7 @@
     <ProjectGuid>{06EA48D6-9382-4F33-9CF9-D4464730FF09}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CodeWarsCurrent</RootNamespace>
+    <RootNamespace>codewars</RootNamespace>
     <AssemblyName>CodeWarsCurrent</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -45,9 +45,11 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Runes.cs" />
+    <Compile Include="RunesTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Runes.Readme.md" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />

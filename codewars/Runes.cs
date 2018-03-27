@@ -29,7 +29,7 @@ Complete the method to solve the expression to find the value of the unknown run
 public class Runes
 {
     internal int FirstNumber;
-    internal char NumberOperator = char.MaxValue;
+    internal char NumberOperator;
     internal int Result;
     internal int SecondNumber;
 
@@ -88,7 +88,7 @@ public class Runes
         var numberOperatorChars = new[] { '-', '+', '*' };
         var operationsPos = expression.IndexOfAny(numberOperatorChars, 1);
 
-        if (operationsPos >= equalsSignPos || equalsSignPos == -1)
+        if (equalsSignPos == -1 || operationsPos == -1 || operationsPos >= equalsSignPos)
         {
             return false;
         }
@@ -105,7 +105,9 @@ public class Runes
     {
         int[] range = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
-        var usedDigits = expression.ToCharArray().Where(char.IsDigit).Select(c => (int)char.GetNumericValue(c)).ToArray();
+        var usedDigits = expression.ToCharArray()
+            .Where(char.IsDigit)
+            .Select(c => (int)char.GetNumericValue(c));
 
         return range.Except(usedDigits);
     }
@@ -137,6 +139,7 @@ public class RunesTest
     [TestCase("123*45?=5?088", ExpectedResult = 6, TestName = "Answer for expression '123*45?=5?088' ")]
     [TestCase("-5?*-1=5?", ExpectedResult = 0, TestName = "Answer for expression '-5?*-1=5?' ")]
     [TestCase("19--45=5?", ExpectedResult = -1, TestName = "Answer for expression '19--45=5?' ")]
+    [TestCase("1975=6", ExpectedResult = -1, TestName = "Answer for expression '1975=6' ")]
     [TestCase("??*??=302?", ExpectedResult = 5, TestName = "Answer for expression '??*??=302?' ")]
     [TestCase("?*11=??", ExpectedResult = 2, TestName = "Answer for expression '?*11=??' ")]
     [TestCase("??*1=??", ExpectedResult = 2, TestName = "Answer for expression '??*1=??' ")]

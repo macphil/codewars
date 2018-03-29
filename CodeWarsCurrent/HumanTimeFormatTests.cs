@@ -1,27 +1,8 @@
-﻿using System.Linq;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 [TestFixture]
 public class HumanTimeFormatTests
 {
-    [Test]
-    [TestCase(9, 2, 4, 1)]
-    [TestCase(10, 5, 2, 0)]
-    [TestCase(121, 60, 2, 1)]
-    public void TestEuclideanDivision(int divident, int divisor, int expectedQuotient, int expectedRemainder)
-    {
-        // arrange
-        int quotent;
-        int remainder;
-
-        // act
-        quotent = HumanTimeFormat.EuclideanDivision(divident, divisor, out remainder);
-
-        // assert
-        Assert.That(quotent, Is.EqualTo(expectedQuotient));
-        Assert.That(remainder, Is.EqualTo(expectedRemainder));
-    }
-
     [Test]
     [TestCase(0, ExpectedResult = "now")]
     [TestCase(1, ExpectedResult = "1 second")]

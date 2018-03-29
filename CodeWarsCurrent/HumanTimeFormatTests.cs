@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Linq;
+using NUnit.Framework;
 
 public class HumanTimeFormat
 {
@@ -8,11 +9,30 @@ public class HumanTimeFormat
         {
             return "now";
         }
-        // var humanTimeFormat = new System.Text.StringBuilder();
+        var humanTimeFormat = new System.Collections.Generic.List<string>
+        {
+            ParseForTimeUnit(seconds, TimeUnit.year, out int remainder),
+            ParseForTimeUnit(remainder, TimeUnit.day, out remainder),
+            ParseForTimeUnit(remainder, TimeUnit.hour, out remainder),
+            ParseForTimeUnit(remainder, TimeUnit.minute, out remainder),
+            ParseForTimeUnit(remainder, TimeUnit.second, out remainder)
+        };
 
-        var secondsPart =  ParseForTimeUnit(seconds, TimeUnit.seconds, out int remainder);
+        var nonZeroComponents = humanTimeFormat.Where(x => !string.IsNullOrEmpty(x));
+        var humanReadableDuration = string.Empty;
+        if(nonZeroComponents.Count() > 2)
+        {
+            var csvComponents = nonZeroComponents.ToList().GetRange(0, nonZeroComponents.Count() - 2);
+            humanReadableDuration = string.Join(", ", csvComponents) + ", ";
+        }
+        if (nonZeroComponents.Count() > 1)
+        {
+            var recentButOneComponent = nonZeroComponents.Skip(nonZeroComponents.Count() - 2).Take(1);
+            humanReadableDuration += $"{recentButOneComponent.Single()} and ";
+        }
+        humanReadableDuration += nonZeroComponents.Last();
 
-        return secondsPart;
+        return humanReadableDuration;
     }
 
     internal static string ParseForTimeUnit(int seconds, TimeUnit timeUnit, out int remainder)
@@ -20,10 +40,9 @@ public class HumanTimeFormat
         remainder = 0;
         int number = 0;
 
-
         switch (timeUnit)
         {
-            case TimeUnit.seconds:
+            case TimeUnit.second:
                 number = seconds;
                 break;
             default:
@@ -37,12 +56,11 @@ public class HumanTimeFormat
         }
         if(number == 1)
         {
-            var singleTimeUnit = timeUnit.ToString().Substring(0, timeUnit.ToString().Length -1);
-            return $"1 {singleTimeUnit}";
+            return $"1 {timeUnit}";
         }
         else
         {
-            return $"{number} {timeUnit}";
+            return $"{number} {timeUnit}s";
         }
     }
 
@@ -56,7 +74,7 @@ public class HumanTimeFormat
 
 internal enum TimeUnit : int
 {
-    years = 60*60*24*365, days = 60*60*24, hours = 60*60, minutes = 60, seconds = 1
+    year = 60*60*24*365, day = 60*60*24, hour = 60*60, minute = 60, second = 1
 }
 
 [TestFixture]
@@ -105,21 +123,18 @@ public class HumanTimeFormatTests
 
 
     [Test]
-    [Ignore("nyi")]
     public void test3()
     {
         Assert.AreEqual("1 minute and 2 seconds", HumanTimeFormat.formatDuration(62));
     }
 
     [Test]
-    [Ignore("nyi")]
     public void test4()
     {
         Assert.AreEqual("2 minutes", HumanTimeFormat.formatDuration(120));
     }
 
     [Test]
-    [Ignore("nyi")]
     public void test5()
     {
         Assert.AreEqual("1 hour, 1 minute and 2 seconds", HumanTimeFormat.formatDuration(3662));

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 public class HumanTimeFormat
 {
@@ -8,68 +9,79 @@ public class HumanTimeFormat
         {
             return "now";
         }
-        var humanTimeFormat = new System.Collections.Generic.List<string>
-        {
-            ParseForTimeUnit(seconds, TimeUnit.year, out int remainder),
-            ParseForTimeUnit(remainder, TimeUnit.day, out remainder),
-            ParseForTimeUnit(remainder, TimeUnit.hour, out remainder),
-            ParseForTimeUnit(remainder, TimeUnit.minute, out remainder),
-            ParseForTimeUnit(remainder, TimeUnit.second, out remainder)
-        };
 
-        var nonZeroComponents = humanTimeFormat.Where(x => !string.IsNullOrEmpty(x));
-        var humanReadableDuration = string.Empty;
+        var readableDurations = GetReadableDurations(seconds);
 
-        if (nonZeroComponents.Count() > 2)
-        {
-            var csvComponents = nonZeroComponents.ToList().GetRange(0, nonZeroComponents.Count() - 2);
-            humanReadableDuration = string.Join(", ", csvComponents) + ", ";
-        }
-
-        if (nonZeroComponents.Count() > 1)
-        {
-            var recentButOneComponent = nonZeroComponents.Skip(nonZeroComponents.Count() - 2).Take(1);
-            humanReadableDuration += $"{recentButOneComponent.Single()} and ";
-        }
-
-        humanReadableDuration += nonZeroComponents.Last();
+        var humanReadableDuration = JoinReadableDurations(readableDurations);
 
         return humanReadableDuration;
     }
 
-    internal static string ParseForTimeUnit(int seconds, TimeUnit timeUnit, out int remainder)
+    internal static IEnumerable<string> GetReadableDurations(int seconds)
+    {
+        return new List<string>
+        {
+            ReadableDuration(seconds, TimeUnit.year, out int remainder),
+            ReadableDuration(remainder, TimeUnit.day, out remainder),
+            ReadableDuration(remainder, TimeUnit.hour, out remainder),
+            ReadableDuration(remainder, TimeUnit.minute, out remainder),
+            ReadableDuration(remainder, TimeUnit.second, out remainder)
+        }.Where(x => !string.IsNullOrEmpty(x));
+    }
+
+    internal static string JoinReadableDurations(IEnumerable<string> readableDurations)
+    {
+        var joinedReadableDurations = string.Empty;
+        switch (readableDurations.Count())
+        {
+            case 5:
+            case 4:
+            case 3:
+                var lastButTwoComponents = readableDurations.ToList().GetRange(0, readableDurations.Count() - 2);
+                joinedReadableDurations = string.Join(", ", lastButTwoComponents) + ", ";
+                goto case 2;
+            case 2:
+                var lastButOneComponent = readableDurations.Skip(readableDurations.Count() - 2).Take(1);
+                joinedReadableDurations += $"{lastButOneComponent.Single()} and ";
+                goto default;
+            default:
+                joinedReadableDurations += readableDurations.Last();
+                break;
+        }
+
+        return joinedReadableDurations;
+    }
+
+    internal static string ReadableDuration(int seconds, TimeUnit timeUnit, out int remainder)
     {
         remainder = 0;
-        int number = 0;
+        int number = timeUnit == TimeUnit.second ? seconds : HumanTimeFormat.EuclideanDivision(seconds, (int)timeUnit, out remainder);
 
-        if (timeUnit == TimeUnit.second)
+        switch (number)
         {
-            number = seconds;
-        }
-        else
-        {
-            HumanTimeFormat.EuclideanDivision(seconds, (int)timeUnit, out number, out remainder);
-        }
-
-
-        if (number == 0)
-        {
-            return string.Empty;
-        }
-        if (number == 1)
-        {
-            return $"1 {timeUnit}";
-        }
-        else
-        {
-            return $"{number} {timeUnit}s";
+            case 0:
+                return string.Empty;
+            case 1:
+                return $"1 {timeUnit}";
+            default:
+                return $"{number} {timeUnit}s";
         }
     }
 
-
-    internal static void EuclideanDivision(int divident, int divisor, out int quotient, out int remainder)
+    internal static int EuclideanDivision(int divident, int divisor, out int remainder)
     {
-        quotient = divident / divisor;
+        int quotient = divident / divisor;
         remainder = divident % divisor;
+
+        return quotient;
     }
+}
+
+internal enum TimeUnit
+{
+    second = 1,
+    minute = 60,
+    hour = 60 * 60,
+    day = 60 * 60 * 24,
+    year = 60 * 60 * 24 * 365
 }

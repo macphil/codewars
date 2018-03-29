@@ -1,26 +1,21 @@
 ﻿using System.Linq;
 using NUnit.Framework;
 
-internal enum TimeUnit : int
-{
-    year = 60*60*24*365, day = 60*60*24, hour = 60*60, minute = 60, second = 1
-}
-
 [TestFixture]
 public class HumanTimeFormatTests
 {
     [Test]
     [TestCase(9, 2, 4, 1)]
     [TestCase(10, 5, 2, 0)]
-    [TestCase(121,60,2,1)]
-    public void TestEuclideanDivision(int divident, int divisor, int expectedQuotient, int expectedRemainder) 
+    [TestCase(121, 60, 2, 1)]
+    public void TestEuclideanDivision(int divident, int divisor, int expectedQuotient, int expectedRemainder)
     {
         // arrange
         int quotent;
         int remainder;
 
         // act
-        HumanTimeFormat.EuclideanDivision(divident, divisor, out quotent, out remainder);
+        quotent = HumanTimeFormat.EuclideanDivision(divident, divisor, out remainder);
 
         // assert
         Assert.That(quotent, Is.EqualTo(expectedQuotient));
@@ -35,8 +30,15 @@ public class HumanTimeFormatTests
     [TestCase(2, ExpectedResult = "2 seconds")]
     [TestCase(61, ExpectedResult = "1 minute and 1 second")]
     [TestCase(62, ExpectedResult = "1 minute and 2 seconds")]
+    [TestCase(60 * 2 + 2, ExpectedResult = "2 minutes and 2 seconds")]
+    [TestCase(60 * 60 * 2 + 2, ExpectedResult = "2 hours and 2 seconds")]
+    [TestCase(60 * 60 * 2 - 4, ExpectedResult = "1 hour, 59 minutes and 56 seconds")]
+    [TestCase(60 * 60 * 24 + 1, ExpectedResult = "1 day and 1 second")]
+    [TestCase(60 * 60 * 24 + 61, ExpectedResult = "1 day, 1 minute and 1 second")]
+    [TestCase(60 * 60 * 24 * 365 + 60 * 60 * 24 + 60 * 60 + 61, ExpectedResult = "1 year, 1 day, 1 hour, 1 minute and 1 second")]
+    [TestCase(60 * 60 * 24 * 365 + 1, ExpectedResult = "1 year and 1 second")]
+    [TestCase(int.MaxValue, ExpectedResult = "68 years, 35 days, 3 hours, 14 minutes and 7 seconds")]
     public string FormatDurationTests(int seconds) => HumanTimeFormat.formatDuration(seconds);
-
 
     [Test]
     public void test1()
@@ -49,7 +51,6 @@ public class HumanTimeFormatTests
     {
         Assert.AreEqual("1 second", HumanTimeFormat.formatDuration(1));
     }
-
 
     [Test]
     public void test3()

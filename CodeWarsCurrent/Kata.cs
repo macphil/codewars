@@ -7,6 +7,12 @@
             return str;
         }
 
+        internal static string JustifyLine(string text, int width)
+        {
+            int spacesToAdd = width - text.Length;
+            int noOfSpaces = text.Length - text.Remove(' ').Length;
+            return text;
+        }
 
         internal static string GetWordsUpToWidth(string text, int width)
         {

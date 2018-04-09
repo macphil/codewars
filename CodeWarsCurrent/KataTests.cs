@@ -33,6 +33,8 @@ namespace codewars
         [TestCase("Hello World", 10, ExpectedResult = "Hello\nWorld", Ignore = "nji")]
         public string JustifyTests(string str, int len) => Kata.Justify(str, len);
 
+        [TestCase("Lorem ipsum dolor sit amet,", 30, ExpectedResult = "Lorem  ipsum  dolor  sit amet,")]
+        public string JustifyLine(string str, int len) => Kata.JustifyLine(str, len);
 
         [Test]
         [TestCase("Hello World", 110, ExpectedResult = "Hello World")]

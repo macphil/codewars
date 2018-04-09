@@ -118,12 +118,15 @@
     <Compile Include="large-factorials.cs" />
     <Compile Include="ookkk-ok-o-ook-ok-ooo.cs" />
     <Compile Include="Possibilities.cs" />
+    <Compile Include="Runes.cs" />
+    <Compile Include="RunesTest.cs" />
     <Compile Include="SudokuSolutionValidator.cs" />
     <Compile Include="ValidBraces .cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="readme.md" />
+    <None Include="Runes.Readme.md" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />

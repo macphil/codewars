@@ -122,11 +122,14 @@
     <Compile Include="RunesTest.cs" />
     <Compile Include="SudokuSolutionValidator.cs" />
     <Compile Include="ValidBraces .cs" />
+    <Compile Include="HumanTimeFormat.cs" />
+    <Compile Include="HumanTimeFormatTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="readme.md" />
     <None Include="Runes.Readme.md" />
+    <None Include="human-readable-duration-format.md" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />

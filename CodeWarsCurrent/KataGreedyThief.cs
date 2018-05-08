@@ -36,6 +36,9 @@ namespace codewars
             {
                 return stolen;
             }
+            var notTooHeavyItems = potentialItems.Where(x => x.Weight <= maxWeight);
+
+            stolen.Add(notTooHeavyItems.OrderByDescending(x => (double)x.Price / (double)x.Weight).First());
 
             return stolen;
         }

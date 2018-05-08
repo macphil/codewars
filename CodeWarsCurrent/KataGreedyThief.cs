@@ -36,9 +36,18 @@ namespace codewars
             {
                 return stolen;
             }
-            var notTooHeavyItems = potentialItems.Where(x => x.Weight <= maxWeight);
+            var notTooHeavyItems = potentialItems.Where(x => x.Weight <= maxWeight)
+                                                 .OrderByDescending(x => (double)x.Price / (double)x.Weight);
 
-            stolen.Add(notTooHeavyItems.OrderByDescending(x => (double)x.Price / (double)x.Weight).First());
+            var weight = 0;
+            foreach (var potentialItem in notTooHeavyItems)
+            {
+                if (weight + potentialItem.Weight <= maxWeight)
+                {
+                    stolen.Add(potentialItem);
+                    weight += potentialItem.Weight;
+                }
+            }
 
             return stolen;
         }

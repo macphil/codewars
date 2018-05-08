@@ -8,7 +8,7 @@ namespace codewars
     [TestFixture()]
     public class GreedyThiefTetst
     {
-        [Test(), Ignore("nyi")]
+        [Test()]
         public void FirstExample()
         {
             // arrange

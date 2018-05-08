@@ -74,5 +74,29 @@ namespace codewars
             Assert.That(stolen, Has.Count.EqualTo(1));
             Assert.That(stolen.Sum(x => x.Price), Is.EqualTo(11));
         }
+
+
+        [Test]
+        public void TestSelectNothingWorthless()
+        {
+            // arrange
+            var arrangedItems = new List<Item>
+            {
+                new Item(2, 2),
+                new Item(0, 0),
+                new Item(1, 0),
+                new Item(0, 1),
+                new Item(2, 2),
+                new Item(2, 2)
+            };
+
+            // act
+            var stolen = KataGreedyThief.GreedyThief(arrangedItems, 6);
+
+            // assert
+            Assert.That(stolen, Has.Count.EqualTo(4));
+            Assert.That(stolen.Sum(x => x.Price), Is.EqualTo(7));
+        }
+
     }
 }

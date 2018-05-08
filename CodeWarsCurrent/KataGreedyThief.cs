@@ -32,13 +32,9 @@ namespace codewars
         public static List<Item> GreedyThief(List<Item> potentialItems, int maxWeight)
         {
             var stolen = new List<Item>();
-            if (potentialItems.Min(x => x.Weight) > maxWeight)
-            {
-                return stolen;
-            }
-            var notTooHeavyItems = potentialItems.Where(x => x.Weight <= maxWeight)
-                                                 .OrderByDescending(x => (double)x.Price / (double)x.Weight);
 
+            var notTooHeavyItems = potentialItems.Where(x => x.Price > 0 && x.Weight <= maxWeight)
+                                                 .OrderByDescending(x => (double)x.Price / (double)x.Weight);
             var weight = 0;
             foreach (var potentialItem in notTooHeavyItems)
             {

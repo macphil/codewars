@@ -124,6 +124,8 @@
     <Compile Include="ValidBraces .cs" />
     <Compile Include="HumanTimeFormat.cs" />
     <Compile Include="HumanTimeFormatTests.cs" />
+    <Compile Include="GreedyThiefTetst.cs" />
+    <Compile Include="KataGreedyThief.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

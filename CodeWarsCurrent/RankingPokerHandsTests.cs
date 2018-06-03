@@ -7,6 +7,12 @@
 
     /// <summary>
     ///  see https://www.codewars.com/kata/ranking-poker-hands/csharp
+    /// 
+    /// The first character is the value of the card, valid characters are: 
+    /// 2, 3, 4, 5, 6, 7, 8, 9, T(en), J(ack), Q(ueen), K(ing), A(ce)
+    /// 
+    /// The second character represents the suit, valid characters are: 
+    /// S(pades), H(earts), D(iamonds), C(lubs)
     /// </summary>
 
     [TestFixture]
@@ -41,14 +47,76 @@
         Tie
     }
 
+    public enum HandRanking
+    {
+        Unknown = 0,
+        HighCard = 1,
+        Pair = 2,
+        TwoPair = 3,
+        Trips = 4,
+        Straight = 5,
+        Flush = 6,
+        FullHouse = 7,
+        Quads = 8,
+        StraightFlush = 9,
+        RoyalFlush = 10
+    }
+
+    public class Card
+    {
+        public char Suit { get; }
+
+        public char Value { get; }
+
+        public Card(string card)
+        {
+            Value = card[0];
+            Suit = card[1];
+        }
+
+        public override string ToString()
+        {
+            return $"Card: {Value} {Suit}";
+        }
+    }
+
     public class PokerHand
     {
+        List<Card> _hand;
+        public HandRanking handRanking { get; private set; }
         public PokerHand(string hand)
         {
+            _hand = new List<Card>();
+            handRanking = HandRanking.Unknown;
+            foreach (string card in hand.Split(' '))
+            {
+                _hand.Add(new Card(card));
+            }
+
+            handRanking = ParseHand(_hand);
+
+        }
+
+        private HandRanking ParseHand(List<Card> hand)
+        {
+            var uniqSuits = hand.Select(x => x.Suit).Distinct();
+            if (uniqSuits.Count() == 1)
+            {
+                return HandRanking.Flush;
+            }
+            return HandRanking.Unknown;
         }
 
         public Result CompareWith(PokerHand hand)
         {
+            if (this.handRanking > hand.handRanking)
+            {
+                return Result.Win;
+            }
+            if (this.handRanking < hand.handRanking)
+            {
+                return Result.Loss;
+            }
             return Result.Tie;
         }
     }

@@ -48,10 +48,18 @@ namespace codewars
                 }
             }
 
-            var dirtyChars = new List<char>();
-            dirtyChars.Add(' ');
+            var dirtyChars = new List<char>
+            {
+                ' '
+            };
             dirtyChars.AddRange(Path.GetInvalidFileNameChars());
             dirtyChars.AddRange(Path.GetInvalidPathChars());
+
+            if (!dirtyChars.Contains(':'))
+            {   // when executed under macOS, the Path.Invalid*Chars does not return an colon
+                dirtyChars.Add(':');
+            }
+
             var sanitizedString = new StringBuilder();
             foreach (char c in actual)
             {

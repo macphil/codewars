@@ -38,13 +38,13 @@ namespace codewars
         [Test]
         public void testSample()
         {
-            Assert.AreEqual(2, Runes.SolveExpression("1+1=?"), "Answer for expression '1+1=?' ");
-            Assert.AreEqual(6, Runes.SolveExpression("123*45?=5?088"), "Answer for expression '123*45?=5?088' ");
-            Assert.AreEqual(0, Runes.SolveExpression("-5?*-1=5?"), "Answer for expression '-5?*-1=5?' ");
-            Assert.AreEqual(-1, Runes.SolveExpression("19--45=5?"), "Answer for expression '19--45=5?' ");
-            Assert.AreEqual(5, Runes.SolveExpression("??*??=302?"), "Answer for expression '??*??=302?' ");
-            Assert.AreEqual(2, Runes.SolveExpression("?*11=??"), "Answer for expression '?*11=??' ");
-            Assert.AreEqual(2, Runes.SolveExpression("??*1=??"), "Answer for expression '??*1=??' ");
+            Assert.That(Runes.SolveExpression("1+1=?"), Is.EqualTo(2), "Answer for expression '1+1=?' ");
+            Assert.That(Runes.SolveExpression("123*45?=5?088"), Is.EqualTo(6), "Answer for expression '123*45?=5?088' ");
+            Assert.That(Runes.SolveExpression("-5?*-1=5?"), Is.EqualTo(0), "Answer for expression '-5?*-1=5?' ");
+            Assert.That(Runes.SolveExpression("19--45=5?"), Is.EqualTo(-1), "Answer for expression '19--45=5?' ");
+            Assert.That(Runes.SolveExpression("??*??=302?"), Is.EqualTo(5), "Answer for expression '??*??=302?' ");
+            Assert.That(Runes.SolveExpression("?*11=??"), Is.EqualTo(2), "Answer for expression '?*11=??' ");
+            Assert.That(Runes.SolveExpression("??*1=??"), Is.EqualTo(2), "Answer for expression '??*1=??' ");
         }
 
         [Test]

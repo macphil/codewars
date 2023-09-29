@@ -24,30 +24,30 @@ public class HumanTimeFormatTests
     [Test]
     public void test1()
     {
-        Assert.AreEqual("now", HumanTimeFormat.formatDuration(0));
+        Assert.That(HumanTimeFormat.formatDuration(0), Is.EqualTo("now"));
     }
 
     [Test]
     public void test2()
     {
-        Assert.AreEqual("1 second", HumanTimeFormat.formatDuration(1));
+        Assert.That(HumanTimeFormat.formatDuration(1), Is.EqualTo("1 second"));
     }
 
     [Test]
     public void test3()
     {
-        Assert.AreEqual("1 minute and 2 seconds", HumanTimeFormat.formatDuration(62));
+        Assert.That(HumanTimeFormat.formatDuration(62), Is.EqualTo("1 minute and 2 seconds"));
     }
 
     [Test]
     public void test4()
     {
-        Assert.AreEqual("2 minutes", HumanTimeFormat.formatDuration(120));
+        Assert.That(HumanTimeFormat.formatDuration(120), Is.EqualTo("2 minutes"));
     }
 
     [Test]
     public void test5()
     {
-        Assert.AreEqual("1 hour, 1 minute and 2 seconds", HumanTimeFormat.formatDuration(3662));
+        Assert.That(HumanTimeFormat.formatDuration(3662), Is.EqualTo("1 hour, 1 minute and 2 seconds"));
     }
 }

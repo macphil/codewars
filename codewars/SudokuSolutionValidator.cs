@@ -94,8 +94,8 @@
             }
         }
 
-        [Test, TestCaseSource("testCases")]
-        public void Test(bool expected, int[][] board) => Assert.AreEqual(expected, Sudoku.ValidateSolution(board));
+        [Test, TestCaseSource(nameof(testCases))]
+        public void Test(bool expected, int[][] board) => Assert.That(Sudoku.ValidateSolution(board), Is.EqualTo(expected));
 
         [Test]
         public void TestValidateBlocks()

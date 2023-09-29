@@ -8,7 +8,7 @@ namespace codewars.SmallestIntegerFinder
         [TestCase(new int[] { 78, 56, -2, 12, 8, -33 }, -33)]
         public static void FixedTest(int[] args, int expected)
         {
-            Assert.AreEqual(expected, SmallestIntegerFinderKata.FindSmallestInt(args));
+            Assert.That(SmallestIntegerFinderKata.FindSmallestInt(args), Is.EqualTo(expected));
         }
     }
 }

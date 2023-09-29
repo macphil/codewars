@@ -42,7 +42,7 @@ namespace codewars
         [TestCase("127.0.0.1", true)]
         public void IpValidator_AreEqual(string actual, bool expected)
         {
-            Assert.AreEqual(expected, IpValidator(actual));
+            Assert.That(IpValidator(actual), Is.EqualTo(expected));
         }
 
         public static bool IpValidator(string ip)

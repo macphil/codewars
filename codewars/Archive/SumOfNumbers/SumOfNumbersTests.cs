@@ -13,7 +13,7 @@ namespace codewars.SumOfNumbers
         [TestCase(-1, 2, 2)]  // -1 + 0 + 1 + 2 = 2
         public void SumOfNumbersTest_AreEqual(int i, int j, int expected)
         {
-            Assert.AreEqual(expected, SumOfNumbersKata.GetSum(i, j));
+            Assert.That(SumOfNumbersKata.GetSum(i, j), Is.EqualTo(expected));
         }
     }
 }

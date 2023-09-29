@@ -13,7 +13,7 @@ public class AreaCalculationTests
 
         var triangle = new Triangle(triangleBase, triangleHeight);
 
-        Assert.AreEqual(12, sut.GetTotalArea(triangle));
+        Assert.That(sut.GetTotalArea(triangle), Is.EqualTo(12));
     }
 
     [Test]
@@ -23,7 +23,7 @@ public class AreaCalculationTests
 
         var square = new Square(side);
 
-        Assert.AreEqual(36, sut.GetTotalArea(square));
+        Assert.That(sut.GetTotalArea(square), Is.EqualTo(36));
     }
 
     [Test]
@@ -34,7 +34,7 @@ public class AreaCalculationTests
 
         var rectangle = new Rectangle(height, width);
 
-        Assert.AreEqual(32, sut.GetTotalArea(rectangle));
+        Assert.That(sut.GetTotalArea(rectangle), Is.EqualTo(32));
     }
 
     [Test]
@@ -44,24 +44,24 @@ public class AreaCalculationTests
 
         var circle = new Circle(radius);
 
-        Assert.AreEqual(28.27, sut.GetTotalArea(circle));
+        Assert.That(sut.GetTotalArea(circle), Is.EqualTo(28.27));
     }
 
     [Test]
     public void TotalAreaIsSumOfAreasOfDifferentShapes()
     {
-        Assert.AreEqual(49.14, sut.GetTotalArea(new Rectangle(4, 2), new Rectangle(3, 4), new Circle(1), new Square(1), new Triangle(10, 5)));
+        Assert.That(sut.GetTotalArea(new Rectangle(4, 2), new Rectangle(3, 4), new Circle(1), new Square(1), new Triangle(10, 5)), Is.EqualTo(49.14));
     }
 
     [Test]
     public void TotalAreaIsRoundedTo2Decimals()
     {
-        Assert.AreEqual(4.45, sut.GetTotalArea(new Rectangle(1.112, 2), new Rectangle(1.111, 2)));
+        Assert.That(sut.GetTotalArea(new Rectangle(1.112, 2), new Rectangle(1.111, 2)), Is.EqualTo(4.45));
     }
 
     [Test]
     public void TotalAreaIs0WhenThereAreNoShapes()
     {
-        Assert.AreEqual(0, sut.GetTotalArea());
+        Assert.That(sut.GetTotalArea(), Is.EqualTo(0));
     }
 }

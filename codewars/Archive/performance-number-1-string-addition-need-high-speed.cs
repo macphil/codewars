@@ -26,8 +26,8 @@ namespace codewars
 
             actual = Performance(getRandomValue);
 
-            Assert.AreEqual(150000, actual.Length);
-            Assert.AreEqual((char)(lastValue + 48), actual.Last());
+            Assert.That(actual.Length, Is.EqualTo(150000));
+            Assert.That(actual.Last(), Is.EqualTo((char)(lastValue + 48)));
         }
 
         public static string Performance(Func<int> method)

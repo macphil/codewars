@@ -10,7 +10,7 @@ namespace codewars
         [Test]
         public void BasicTests()
         {
-            Assert.AreEqual("one,three,two", string.Join(",", SortMe(new[] { "one", "two", "three" })));
+            Assert.That(string.Join(",", SortMe(new[] { "one", "two", "three" })), Is.EqualTo("one,three,two"));
         }
 
         private string[] SortMe(string[] names)

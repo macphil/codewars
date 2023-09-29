@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.Text;
 using System.Text.RegularExpressions;
-using NUnit.Framework;
 
 namespace codewars
 {
@@ -48,10 +43,18 @@ namespace codewars
                 }
             }
 
-            var dirtyChars = new List<char>();
-            dirtyChars.Add(' ');
+            var dirtyChars = new List<char>
+            {
+                ' '
+            };
             dirtyChars.AddRange(Path.GetInvalidFileNameChars());
             dirtyChars.AddRange(Path.GetInvalidPathChars());
+
+            if (!dirtyChars.Contains(':'))
+            {   // when executed under macOS, the Path.Invalid*Chars does not return an colon
+                dirtyChars.Add(':');
+            }
+
             var sanitizedString = new StringBuilder();
             foreach (char c in actual)
             {

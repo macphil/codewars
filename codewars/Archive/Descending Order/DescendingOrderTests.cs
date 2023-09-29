@@ -16,7 +16,7 @@ namespace codewars.Descending_Order
         [TestCase(123045, 543210)]
         public void DescendingOrderTest(int i, int expected)
         {
-            Assert.AreEqual(expected, DescendingOrderKata.DescendingOrder(i));
+            Assert.That(DescendingOrderKata.DescendingOrder(i), Is.EqualTo(expected));
         }
     }
 }

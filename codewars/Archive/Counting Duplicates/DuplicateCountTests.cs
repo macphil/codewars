@@ -14,7 +14,7 @@
         [TestCase(2, "Indivisibilities")]
         public void DuplicateCountTest(int expected, string given)
         {
-            Assert.AreEqual(expected, DuplicateCountKata.DuplicateCount(given));
+            Assert.That(DuplicateCountKata.DuplicateCount(given), Is.EqualTo(expected));
         }
     }
 }
